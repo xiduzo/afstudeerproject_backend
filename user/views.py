@@ -15,8 +15,10 @@ class UserViewSet(viewsets.ModelViewSet):
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
+        uid = self.request.query_params.get('uid')
         qs = super(UserViewSet, self).get_queryset()
 
-        return qs
+        if uid:
+            qs = qs.filter(uid=uid)
 
-    
+        return qs

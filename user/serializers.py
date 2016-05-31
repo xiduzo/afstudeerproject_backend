@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'url',
+            'id',
             'created_at',
             'modified_at',
             'uid',

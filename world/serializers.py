@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import (
-    World,
+    World, UserInWorld
 )
 
 from guild.serializers import GuildSerializer
@@ -31,4 +31,13 @@ class WorldSerializer(serializers.ModelSerializer):
             'guilds',
             'quests',
             'gamemasters'
+        )
+
+class UserInWorldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserInWorld
+        fields = (
+            'url',
+            'user',
+            'world',
         )
