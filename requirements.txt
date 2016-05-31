@@ -1,0 +1,33 @@
+django>=1.9,<1.10
+psycopg2
+djangorestframework>=3.2,<4
+markdown
+django-filter
+pytz
+django-cors-headers==1.1.0
+djangorestframework-jwt==1.7.2
+requests==2.8.1
+django-websocket-redis>=0.4.4,<0.5
+uwsgi==2.0.11.2
+celery==3.1.19
+django-polymorphic>=0.9,<0.10
+
+paramiko
+unicodecsv
+raven<5
+
+#ssl stuff
+pyopenssl==0.15.1
+ndg-httpsclient==0.4.0
+pyasn1==0.1.9
+
+# Test deps
+
+freezegun==0.3.5
+websocket-client==0.34
+django-redis-sessions==0.5.0
+
+slacker
+
+django-pgjson==0.3.1
+jsonfield
