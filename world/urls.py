@@ -1,11 +1,10 @@
 from rest_framework import routers
 
 from .views import (
-    WorldViewSet, WorldOverviewSet
+    WorldViewSet
 )
 
 router = routers.DefaultRouter()
-router.register(r'all', WorldViewSet)
-router.register(r'overview', WorldOverviewSet)
+router.register(r'worlds', WorldViewSet)
 
 urlpatterns = router.urls

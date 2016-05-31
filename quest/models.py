@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import IntegerField, Model
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from libs.models import UUIDModel
 
@@ -7,11 +9,36 @@ class Quest(UUIDModel):
     name = models.CharField(max_length=200)
     description = models.TextField()
     experience = models.PositiveIntegerField()
-    interaction_design = models.PositiveIntegerField()
-    visual_interface_design = models.PositiveIntegerField()
-    frontend_development = models.PositiveIntegerField()
-    content_management = models.PositiveIntegerField()
-    project_management = models.PositiveIntegerField()
+    interaction_design = IntegerField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ]
+    )
+    visual_interface_design = IntegerField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ]
+    )
+    frontend_development = IntegerField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ]
+    )
+    content_management = IntegerField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ]
+    )
+    project_management = IntegerField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ]
+    )
     world = models.ForeignKey('world.World', related_name='quests')
     active = models.BooleanField(default=True)
 

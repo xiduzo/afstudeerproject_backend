@@ -11,7 +11,17 @@ class QuestSerializer(serializers.ModelSerializer):
         model = Quest
         fields = (
             'url',
+            'id',
             'created_at',
             'modified_at',
             'name',
+            'description',
+            'experience',
+            'interaction_design',
+            'visual_interface_design',
+            'frontend_development',
+            'content_management',
+            'project_management',
+            'world',
+            'active',
         )

@@ -9,7 +9,7 @@ from quest.models import Quest
 from quest.serializers import QuestSerializer
 
 # Create your views here.
-class QuestViewSet(viewsets.ReadOnlyModelViewSet):
+class QuestViewSet(viewsets.ModelViewSet):
     queryset = Quest.objects.all()
     serializer_class = QuestSerializer
     # authentication_classes = (authentication.SessionAuthentication,)
