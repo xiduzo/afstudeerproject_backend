@@ -6,12 +6,12 @@ from .models import (
 )
 
 from user.models import User
-from user.serializers import UserSerializer
+from user.serializers import UserSerializer, PlainUserSerializer
 
 class GuildSerializer(serializers.HyperlinkedModelSerializer):
     def get_members(self, obj):
         users = User.objects.filter(guilds__guild=obj)
-        return UserSerializer(instance=users, many=True, context=self.context).data
+        return PlainUserSerializer(instance=users, many=True, context=self.context).data
 
     members = serializers.SerializerMethodField()
 
@@ -19,6 +19,7 @@ class GuildSerializer(serializers.HyperlinkedModelSerializer):
         model = Guild
         fields = (
             'url',
+            'id',
             'created_at',
             'modified_at',
             'name',

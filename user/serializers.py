@@ -5,6 +5,9 @@ from .models import (
     User,
 )
 
+from world.models import World, UserInWorld
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -21,5 +24,28 @@ class UserSerializer(serializers.ModelSerializer):
             'surname',
             'gender',
             'is_staff',
-            'is_superuser'
+            'is_superuser',
+        )
+
+class PlainUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'url',
+            'id',
+            'uid',
+            'email',
+            'first_name',
+            'surname',
+        )
+
+class GamemasterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'url',
+            'id',
+            'initials',
+            'first_name',
+            'surname',
         )

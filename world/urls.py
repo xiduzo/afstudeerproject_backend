@@ -1,7 +1,8 @@
 from rest_framework import routers
 
 from .views import (
-    WorldViewSet, UserInWorldViewSet
+    WorldViewSet,
+    UserInWorldViewSet,
 )
 
 router = routers.DefaultRouter()

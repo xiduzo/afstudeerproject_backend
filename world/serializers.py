@@ -6,9 +6,8 @@ from .models import (
 
 from guild.serializers import GuildSerializer
 from quest.serializers import QuestSerializer
-from user.serializers import UserSerializer
+from user.serializers import UserSerializer, GamemasterSerializer
 from user.models import User
-
 
 class WorldSerializer(serializers.ModelSerializer):
     guilds = GuildSerializer(many=True, read_only=True)
@@ -16,7 +15,7 @@ class WorldSerializer(serializers.ModelSerializer):
 
     def get_gamemasters(self, obj):
         gamemasters = User.objects.filter(worlds__world=obj)
-        return UserSerializer(instance=gamemasters, many=True, context=self.context).data
+        return GamemasterSerializer(instance=gamemasters, many=True, context=self.context).data
 
     gamemasters = serializers.SerializerMethodField()
 
@@ -33,11 +32,54 @@ class WorldSerializer(serializers.ModelSerializer):
             'gamemasters'
         )
 
+class PlainWorldSerializer(serializers.ModelSerializer):
+    guilds = GuildSerializer(many=True, read_only=True)
+    class Meta:
+        model = World
+        fields = (
+            'url',
+            'id',
+            'name',
+            'guilds'
+        )
+
 class UserInWorldSerializer(serializers.ModelSerializer):
+    user = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        queryset=User.objects.all(),
+    )
+    world = serializers.HyperlinkedRelatedField(
+        view_name='world-detail',
+        queryset=World.objects.all(),
+    )
     class Meta:
         model = UserInWorld
         fields = (
             'url',
             'user',
             'world',
+        )
+
+class UserWorld(serializers.ModelSerializer):
+    world = PlainWorldSerializer()
+    class Meta:
+        model = UserInWorld
+        fields = (
+            'url',
+            'world',
+        )
+
+class UserWorldsSerializer(serializers.ModelSerializer):
+    def get_worlds(self, obj):
+        worlds = UserInWorld.objects.filter(user=obj)
+        return UserWorld(instance=worlds, many=True, context=self.context).data
+
+    worlds = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = (
+            'url',
+            'id',
+            'worlds',
         )
