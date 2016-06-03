@@ -40,7 +40,7 @@ class Quest(UUIDModel):
         ]
     )
     world = models.ForeignKey('world.World', related_name='quests')
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}'.format(
