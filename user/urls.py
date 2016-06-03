@@ -2,7 +2,7 @@ from rest_framework import routers
 
 from .views import (
     UserViewSet,
-    UserWorldsViewSet
+    UserWorldsViewSet,
 )
 
 router = routers.DefaultRouter()
