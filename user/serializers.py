@@ -45,6 +45,7 @@ class GamemasterSerializer(serializers.ModelSerializer):
         fields = (
             'url',
             'id',
+            'email',
             'initials',
             'first_name',
             'surname',
