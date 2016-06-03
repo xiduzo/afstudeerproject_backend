@@ -5,8 +5,13 @@ from .models import (
     Quest,
 )
 
+from world.models import World
 
 class QuestSerializer(serializers.ModelSerializer):
+    world = serializers.HyperlinkedRelatedField(
+        view_name='world-detail',
+        queryset=World.objects.all(),
+    )
     class Meta:
         model = Quest
         fields = (
@@ -14,6 +19,7 @@ class QuestSerializer(serializers.ModelSerializer):
             'id',
             'created_at',
             'modified_at',
+            'world',
             'name',
             'description',
             'experience',
@@ -22,6 +28,5 @@ class QuestSerializer(serializers.ModelSerializer):
             'frontend_development',
             'content_management',
             'project_management',
-            'world',
             'active',
         )
