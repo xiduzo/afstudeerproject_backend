@@ -1,8 +1,11 @@
 from rest_framework import serializers
+from django.db.models import Sum
 
 from .models import (
     World, UserInWorld
 )
+
+from quest.models import Quest
 
 from guild.serializers import GuildSerializer
 from quest.serializers import QuestSerializer
@@ -25,11 +28,10 @@ class WorldSerializer(serializers.ModelSerializer):
             'url',
             'id',
             'created_at',
-            'modified_at',
             'name',
-            'guilds',
+            'gamemasters',
             'quests',
-            'gamemasters'
+            'guilds',
         )
 
 class PlainWorldSerializer(serializers.ModelSerializer):

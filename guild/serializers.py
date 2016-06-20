@@ -35,6 +35,17 @@ class GuildSerializer(serializers.ModelSerializer):
             'members',
         )
 
+class PlainGuildSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guild
+        fields = (
+            'url',
+            'id',
+            'created_at',
+            'modified_at',
+            'name',
+        )
+
 class UserInGuildSerializer(serializers.ModelSerializer):
     user = serializers.HyperlinkedRelatedField(
         view_name='user-detail',
@@ -50,4 +61,28 @@ class UserInGuildSerializer(serializers.ModelSerializer):
             'url',
             'user',
             'guild',
+        )
+
+class UserGuild(serializers.ModelSerializer):
+    guild = GuildSerializer()
+    class Meta:
+        model = UserInGuild
+        fields = (
+            'url',
+            'guild',
+        )
+
+class UserGuildsSerializer(serializers.ModelSerializer):
+    def get_guilds(self, obj):
+        guilds = UserInGuild.objects.filter(user=obj)
+        return UserGuild(instance=guilds, many=True, context=self.context).data
+
+    guilds = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = (
+            'url',
+            'id',
+            'guilds',
         )

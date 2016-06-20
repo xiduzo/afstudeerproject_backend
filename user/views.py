@@ -16,6 +16,10 @@ from world.serializers import (
     UserWorldsSerializer,
 )
 
+from guild.serializers import (
+    UserGuildsSerializer,
+)
+
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -46,5 +50,15 @@ class UserWorldsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super(UserWorldsViewSet, self).get_queryset()
+
+        return qs
+
+class UserGuildsViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserGuildsSerializer
+    # authentication_classes = (authentication.SessionAuthentication,)
+
+    def get_queryset(self):
+        qs = super(UserGuildsViewSet, self).get_queryset()
 
         return qs
