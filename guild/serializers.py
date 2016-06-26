@@ -64,7 +64,7 @@ class UserInGuildSerializer(serializers.ModelSerializer):
         )
 
 class UserGuild(serializers.ModelSerializer):
-    guild = GuildSerializer()
+    guild = PlainGuildSerializer()
     class Meta:
         model = UserInGuild
         fields = (

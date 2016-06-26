@@ -46,3 +46,15 @@ class Quest(UUIDModel):
         return '{}'.format(
             self.name,
         )
+
+class QuestObjective(UUIDModel):
+    quest = models.ForeignKey('quest.Quest', related_name='objectives')
+
+    name = models.CharField(max_length=250)
+    objective = models.TextField(blank=True, null=True)
+    points = models.PositiveIntegerField()
+
+    def __str__(self):
+        return '{}'.format(
+            self.name,
+        )

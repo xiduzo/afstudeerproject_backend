@@ -3,15 +3,36 @@ from django.utils.translation import gettext as _
 
 from .models import (
     Quest,
+    QuestObjective,
 )
 
 from world.models import World
+
+class QuestObjectiveSerializer(serializers.ModelSerializer):
+
+    quest = serializers.HyperlinkedRelatedField(
+        view_name='quest-detail',
+        queryset=Quest.objects.all(),
+    )
+
+    class Meta:
+        model = QuestObjective
+        fields = (
+            'url',
+            'quest',
+            'name',
+            'objective',
+            'points'
+        )
 
 class QuestSerializer(serializers.ModelSerializer):
     world = serializers.HyperlinkedRelatedField(
         view_name='world-detail',
         queryset=World.objects.all(),
     )
+
+    objectives = QuestObjectiveSerializer(many=True, read_only=True)
+
     class Meta:
         model = Quest
         fields = (
@@ -29,4 +50,5 @@ class QuestSerializer(serializers.ModelSerializer):
             'content_management',
             'project_management',
             'active',
+            'objectives',
         )
