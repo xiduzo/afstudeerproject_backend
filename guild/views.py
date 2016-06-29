@@ -8,10 +8,12 @@ from rest_framework import (
 from guild.models import (
     Guild,
     UserInGuild,
+    GuildQuest,
 )
 from guild.serializers import (
     GuildSerializer,
     UserInGuildSerializer,
+    GuildQuestSerializer,
 )
 
 # Create your views here.
@@ -28,7 +30,6 @@ class GuildViewSet(viewsets.ModelViewSet):
 class UserInGuildViewSet(viewsets.ModelViewSet):
     queryset = UserInGuild.objects.all()
     serializer_class = UserInGuildSerializer
-    # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
         user = self.request.query_params.get('user')
@@ -37,5 +38,18 @@ class UserInGuildViewSet(viewsets.ModelViewSet):
 
         if user and guild:
             qs = qs.filter(user=user, guild=guild)
+
+        return qs
+
+class GuildQuestViewSet(viewsets.ModelViewSet):
+    queryset = GuildQuest.objects.all()
+    serializer_class = GuildQuestSerializer
+
+    def get_queryset(self):
+        guild = self.request.query_params.get('guild')
+        qs = super(GuildQuestViewSet, self).get_queryset()
+
+        if guild:
+            qs = qs.filter(guild=guild)
 
         return qs

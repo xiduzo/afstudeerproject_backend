@@ -52,3 +52,15 @@ class QuestSerializer(serializers.ModelSerializer):
             'active',
             'objectives',
         )
+
+class PlainQuestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Quest
+        fields = (
+            'url',
+            'id',
+            'created_at',
+            'modified_at',
+            'name',
+        )

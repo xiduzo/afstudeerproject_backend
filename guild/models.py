@@ -19,3 +19,15 @@ class UserInGuild(UUIDModel):
             self.user,
             self.guild,
         )
+
+class GuildQuest(UUIDModel):
+    guild = models.ForeignKey('guild.Guild', related_name='quests')
+    quest = models.ForeignKey('quest.Quest', related_name='guilds')
+
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '{} for {}'.format(
+            self.quest.name,
+            self.guild.name
+        )

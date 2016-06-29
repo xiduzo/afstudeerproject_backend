@@ -9,7 +9,8 @@ from user.models import User
 from user.serializers import UserSerializer, PlainUserSerializer
 
 from world.models import World
-from guild.models import Guild, UserInGuild
+from guild.models import Guild, UserInGuild, GuildQuest
+from quest.models import Quest
 
 class GuildSerializer(serializers.ModelSerializer):
     def get_members(self, obj):
@@ -85,4 +86,23 @@ class UserGuildsSerializer(serializers.ModelSerializer):
             'url',
             'id',
             'guilds',
+        )
+
+class GuildQuestSerializer(serializers.ModelSerializer):
+    guild = serializers.HyperlinkedRelatedField(
+        view_name='guild-detail',
+        queryset=Guild.objects.all(),
+    )
+    quest = serializers.HyperlinkedRelatedField(
+        view_name='quest-detail',
+        queryset=Quest.objects.all(),
+    )
+
+    class Meta:
+        model = GuildQuest
+        fields = (
+            'url',
+            'guild',
+            'quest',
+            'completed'
         )
