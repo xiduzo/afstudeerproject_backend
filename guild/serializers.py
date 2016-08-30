@@ -18,11 +18,15 @@ class GuildSerializer(serializers.ModelSerializer):
         users = User.objects.filter(guilds__guild=obj)
         return PlainUserSerializer(instance=users, many=True, context=self.context).data
 
+    def get_quests(self, obj):
+        quests = Quest.objects.filter(guilds__guild=obj)
+        return QuestSerializer(instance=quests, many=True, context=self.context).data
+
+    quests = serializers.SerializerMethodField()
     members = serializers.SerializerMethodField()
 
-    world = serializers.HyperlinkedRelatedField(
-        view_name='world-detail',
-        queryset=World.objects.all(),
+    world = serializers.PrimaryKeyRelatedField(
+        read_only=True
     )
 
     class Meta:
@@ -34,10 +38,12 @@ class GuildSerializer(serializers.ModelSerializer):
             'modified_at',
             'name',
             'world',
+            'quests',
             'members',
         )
 
 class PlainGuildSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Guild
         fields = (
@@ -67,7 +73,7 @@ class UserInGuildSerializer(serializers.ModelSerializer):
         )
 
 class UserGuild(serializers.ModelSerializer):
-    guild = PlainGuildSerializer()
+    guild = GuildSerializer()
     class Meta:
         model = UserInGuild
         fields = (
@@ -91,8 +97,14 @@ class UserGuildsSerializer(serializers.ModelSerializer):
         )
 
 class GuildQuestSerializer(serializers.ModelSerializer):
-    guild = PlainGuildSerializer()
-    quest = QuestSerializer()
+    guild = serializers.HyperlinkedRelatedField(
+        view_name='guild-detail',
+        queryset=Guild.objects.all(),
+    )
+    quest = serializers.HyperlinkedRelatedField(
+        view_name='quest-detail',
+        queryset=Quest.objects.all(),
+    )
 
     class Meta:
         model = GuildQuest
