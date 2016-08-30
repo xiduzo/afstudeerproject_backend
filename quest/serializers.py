@@ -22,7 +22,8 @@ class QuestObjectiveSerializer(serializers.ModelSerializer):
             'quest',
             'name',
             'objective',
-            'points'
+            'points',
+            'completed',
         )
 
 class QuestSerializer(serializers.ModelSerializer):
@@ -55,6 +56,8 @@ class QuestSerializer(serializers.ModelSerializer):
 
 class PlainQuestSerializer(serializers.ModelSerializer):
 
+    objectives = QuestObjectiveSerializer(many=True, read_only=True)
+
     class Meta:
         model = Quest
         fields = (
@@ -63,4 +66,5 @@ class PlainQuestSerializer(serializers.ModelSerializer):
             'created_at',
             'modified_at',
             'name',
+            'objectives',
         )

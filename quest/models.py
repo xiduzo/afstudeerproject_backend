@@ -54,6 +54,8 @@ class QuestObjective(UUIDModel):
     objective = models.TextField(blank=True, null=True)
     points = models.PositiveIntegerField()
 
+    completed = models.BooleanField(default=False)
+
     def __str__(self):
         return '{}'.format(
             self.name,

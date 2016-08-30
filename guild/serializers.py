@@ -7,6 +7,7 @@ from .models import (
 
 from user.models import User
 from user.serializers import UserSerializer, PlainUserSerializer
+from quest.serializers import QuestSerializer
 
 from world.models import World
 from guild.models import Guild, UserInGuild, GuildQuest
@@ -45,6 +46,7 @@ class PlainGuildSerializer(serializers.ModelSerializer):
             'created_at',
             'modified_at',
             'name',
+            'world',
         )
 
 class UserInGuildSerializer(serializers.ModelSerializer):
@@ -89,14 +91,8 @@ class UserGuildsSerializer(serializers.ModelSerializer):
         )
 
 class GuildQuestSerializer(serializers.ModelSerializer):
-    guild = serializers.HyperlinkedRelatedField(
-        view_name='guild-detail',
-        queryset=Guild.objects.all(),
-    )
-    quest = serializers.HyperlinkedRelatedField(
-        view_name='quest-detail',
-        queryset=Quest.objects.all(),
-    )
+    guild = PlainGuildSerializer()
+    quest = QuestSerializer()
 
     class Meta:
         model = GuildQuest
