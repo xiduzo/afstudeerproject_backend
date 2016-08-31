@@ -40,6 +40,8 @@ class GuildObjective(UUIDModel):
     points = models.PositiveIntegerField()
 
     completed = models.BooleanField(default=False)
+    completed_by = models.ForeignKey('user.User', related_name='users', null=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return '{}'.format(

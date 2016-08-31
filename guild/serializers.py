@@ -28,10 +28,14 @@ class GuildObjectiveSerializer(serializers.ModelSerializer):
     class Meta:
         model = GuildObjective
         fields = (
+            'id',
             'guild',
             'name',
             'objective',
             'points',
+            'completed',
+            'completed_by',
+            'completed_at',
         )
 
 class GuildSerializer(serializers.ModelSerializer):
