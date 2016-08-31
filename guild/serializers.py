@@ -6,24 +6,41 @@ from .models import (
 )
 
 from user.models import User
-from user.serializers import UserSerializer, PlainUserSerializer
-from quest.serializers import QuestSerializer
-
 from world.models import World
-from guild.models import Guild, UserInGuild, GuildQuest
-from quest.models import Quest
+from guild.models import (
+    Guild,
+    UserInGuild,
+    GuildQuest,
+    GuildObjective,
+)
+from quest.models import Quest, QuestObjective
+
+from user.serializers import UserSerializer, PlainUserSerializer
+from quest.serializers import PlainQuestSerializer
+
+class GuildObjectiveSerializer(serializers.ModelSerializer):
+
+    guild = serializers.HyperlinkedRelatedField(
+        view_name='guild-detail',
+        queryset=Guild.objects.all(),
+    )
+
+    class Meta:
+        model = GuildObjective
+        fields = (
+            'guild',
+            'name',
+            'objective',
+            'points',
+        )
 
 class GuildSerializer(serializers.ModelSerializer):
     def get_members(self, obj):
         users = User.objects.filter(guilds__guild=obj)
         return PlainUserSerializer(instance=users, many=True, context=self.context).data
 
-    def get_quests(self, obj):
-        quests = Quest.objects.filter(guilds__guild=obj)
-        return QuestSerializer(instance=quests, many=True, context=self.context).data
-
-    quests = serializers.SerializerMethodField()
     members = serializers.SerializerMethodField()
+    objectives = GuildObjectiveSerializer(many=True, read_only=True)
 
     world = serializers.PrimaryKeyRelatedField(
         read_only=True
@@ -38,8 +55,8 @@ class GuildSerializer(serializers.ModelSerializer):
             'modified_at',
             'name',
             'world',
-            'quests',
             'members',
+            'objectives',
         )
 
 class PlainGuildSerializer(serializers.ModelSerializer):
@@ -112,5 +129,5 @@ class GuildQuestSerializer(serializers.ModelSerializer):
             'url',
             'guild',
             'quest',
-            'completed'
+            'completed',
         )

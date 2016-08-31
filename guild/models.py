@@ -31,3 +31,17 @@ class GuildQuest(UUIDModel):
             self.quest.name,
             self.guild.name
         )
+
+class GuildObjective(UUIDModel):
+    guild = models.ForeignKey('guild.Guild', related_name='objectives')
+
+    name = models.CharField(max_length=250)
+    objective = models.TextField(blank=True, null=True)
+    points = models.PositiveIntegerField()
+
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '{}'.format(
+            self.name,
+        )
