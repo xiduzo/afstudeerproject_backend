@@ -29,6 +29,7 @@ class GuildObjectiveSerializer(serializers.ModelSerializer):
         model = GuildObjective
         fields = (
             'id',
+            'created_at',
             'guild',
             'name',
             'objective',

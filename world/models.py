@@ -4,6 +4,8 @@ from libs.models import UUIDModel
 # Create your models here.
 class World(UUIDModel):
     name = models.CharField(max_length=150)
+    course_duration = models.IntegerField(blank=True, null=True)
+    start = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.name
