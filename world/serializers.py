@@ -29,6 +29,8 @@ class WorldSerializer(serializers.ModelSerializer):
             'id',
             'created_at',
             'name',
+            'course_duration',
+            'start',
             'gamemasters',
             'quests',
             'guilds',
