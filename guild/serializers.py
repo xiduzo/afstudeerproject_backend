@@ -83,7 +83,7 @@ class GuildSerializer(serializers.ModelSerializer):
 
     def get_history_updates(self, obj):
         history_updates = GuildHistoryUpdate.objects.filter(guild=obj)
-        history_updates = history_updates.order_by("-created_at")[:6]
+        history_updates = history_updates.order_by("-created_at")[:20]
         return GuildHistoryUpdateSerializer(instance=history_updates, many=True, context=self.context).data
 
     # def get_quests(self, obj):

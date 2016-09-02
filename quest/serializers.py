@@ -20,6 +20,7 @@ class QuestObjectiveSerializer(serializers.ModelSerializer):
         fields = (
             'url',
             'quest',
+            'created_at',
             'name',
             'objective',
             'points',
