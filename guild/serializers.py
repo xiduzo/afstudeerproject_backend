@@ -69,11 +69,15 @@ class GuildSerializer(serializers.ModelSerializer):
         history_updates = GuildHistoryUpdate.objects.filter(guild=obj)
         history_updates = history_updates.order_by("-created_at")[:6]
         return GuildHistoryUpdateSerializer(instance=history_updates, many=True, context=self.context).data
-    # .order_by("-created_at")[:2]
+
+    def get_quests(self, obj):
+        quests = GuildQuest.objects.filter(guild=obj)
+        return GuildQuestSerializer(instance=quests, many=True, context=self.context).data
+
     members = serializers.SerializerMethodField()
     objectives = GuildObjectiveSerializer(many=True, read_only=True)
     history_updates = serializers.SerializerMethodField()
-    # history_updates = GuildHistoryUpdateSerializer(many=True, read_only=True)
+    quests = serializers.SerializerMethodField()
 
     world = serializers.PrimaryKeyRelatedField(
         read_only=True
@@ -91,6 +95,7 @@ class GuildSerializer(serializers.ModelSerializer):
             'members',
             'objectives',
             'history_updates',
+            'quests',
         )
 
 class PlainGuildSerializer(serializers.ModelSerializer):
