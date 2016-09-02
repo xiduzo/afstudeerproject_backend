@@ -10,12 +10,14 @@ from guild.models import (
     UserInGuild,
     GuildQuest,
     GuildObjective,
+    GuildHistoryUpdate,
 )
 from guild.serializers import (
     GuildSerializer,
     UserInGuildSerializer,
     GuildQuestSerializer,
     GuildObjectiveSerializer,
+    GuildHistoryUpdateSerializer,
 )
 
 # Create your views here.
@@ -62,5 +64,14 @@ class GuildObjectiveViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super(GuildObjectiveViewSet, self).get_queryset()
+
+        return qs
+
+class GuildHistoryUpdateViewSet(viewsets.ModelViewSet):
+    queryset = GuildHistoryUpdate.objects.all()
+    serializer_class = GuildHistoryUpdateSerializer
+
+    def get_queryset(self):
+        qs = super(GuildHistoryUpdateViewSet, self).get_queryset()
 
         return qs

@@ -47,3 +47,15 @@ class GuildObjective(UUIDModel):
         return '{}'.format(
             self.name,
         )
+
+class GuildHistoryUpdate(UUIDModel):
+    guild = models.ForeignKey('guild.Guild', related_name='history_updates')
+    user = models.ForeignKey('user.User', related_name='persons')
+
+    action = models.TextField(blank=False, null=False)
+
+    def __str__(self):
+        return '{} {}'.format(
+            self.user.name,
+            self.action
+        )

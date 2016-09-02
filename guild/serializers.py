@@ -12,11 +12,32 @@ from guild.models import (
     UserInGuild,
     GuildQuest,
     GuildObjective,
+    GuildHistoryUpdate,
 )
 from quest.models import Quest, QuestObjective
 
 from user.serializers import UserSerializer, PlainUserSerializer
 from quest.serializers import PlainQuestSerializer
+
+class GuildHistoryUpdateSerializer(serializers.ModelSerializer):
+    guild = serializers.HyperlinkedRelatedField(
+        view_name='guild-detail',
+        queryset=Guild.objects.all(),
+    )
+    user = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        queryset=User.objects.all(),
+    )
+
+    class Meta:
+        model = GuildHistoryUpdate
+        fields = (
+            'id',
+            'created_at',
+            'user',
+            'guild',
+            'action',
+        )
 
 class GuildObjectiveSerializer(serializers.ModelSerializer):
 
@@ -44,8 +65,15 @@ class GuildSerializer(serializers.ModelSerializer):
         users = User.objects.filter(guilds__guild=obj)
         return PlainUserSerializer(instance=users, many=True, context=self.context).data
 
+    def get_history_updates(self, obj):
+        history_updates = GuildHistoryUpdate.objects.filter(guild=obj)
+        history_updates = history_updates.order_by("-created_at")[:6]
+        return GuildHistoryUpdateSerializer(instance=history_updates, many=True, context=self.context).data
+    # .order_by("-created_at")[:2]
     members = serializers.SerializerMethodField()
     objectives = GuildObjectiveSerializer(many=True, read_only=True)
+    history_updates = serializers.SerializerMethodField()
+    # history_updates = GuildHistoryUpdateSerializer(many=True, read_only=True)
 
     world = serializers.PrimaryKeyRelatedField(
         read_only=True
@@ -62,6 +90,7 @@ class GuildSerializer(serializers.ModelSerializer):
             'world',
             'members',
             'objectives',
+            'history_updates',
         )
 
 class PlainGuildSerializer(serializers.ModelSerializer):
