@@ -25,6 +25,7 @@ class GuildQuest(UUIDModel):
     quest = models.ForeignKey('quest.Quest', related_name='guilds')
 
     completed = models.BooleanField(default=False)
+    completed_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return '{} for {}'.format(
