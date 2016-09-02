@@ -17,7 +17,7 @@ from guild.models import (
 from quest.models import Quest, QuestObjective
 
 from user.serializers import UserSerializer, PlainUserSerializer
-from quest.serializers import PlainQuestSerializer
+from quest.serializers import QuestSerializer, PlainQuestSerializer
 
 class GuildHistoryUpdateSerializer(serializers.ModelSerializer):
     guild = serializers.HyperlinkedRelatedField(
@@ -65,7 +65,7 @@ class GuildFullQuestSerializer(serializers.ModelSerializer):
         view_name='guild-detail',
         queryset=Guild.objects.all(),
     )
-    quest = PlainQuestSerializer();
+    quest = QuestSerializer();
 
     class Meta:
         model = GuildQuest
