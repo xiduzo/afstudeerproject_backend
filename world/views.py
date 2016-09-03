@@ -5,11 +5,11 @@ from rest_framework import (
     mixins,
     status
 )
-from world.models import World
-from world.serializers import WorldSerializer, WorldOverviewSerializer
+from world.models import World, UserInWorld
+from world.serializers import WorldSerializer, UserInWorldSerializer
 
 # Create your views here.
-class WorldViewSet(viewsets.ReadOnlyModelViewSet):
+class WorldViewSet(viewsets.ModelViewSet):
     queryset = World.objects.all()
     serializer_class = WorldSerializer
     # authentication_classes = (authentication.SessionAuthentication,)
@@ -18,14 +18,18 @@ class WorldViewSet(viewsets.ReadOnlyModelViewSet):
         qs = super(WorldViewSet, self).get_queryset()
 
         return qs
-        
 
-class WorldOverviewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = World.objects.all()
-    serializer_class = WorldOverviewSerializer
+class UserInWorldViewSet(viewsets.ModelViewSet):
+    queryset = UserInWorld.objects.all()
+    serializer_class = UserInWorldSerializer
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
-        qs = super(WorldOverviewSet, self).get_queryset()
+        user = self.request.query_params.get('user')
+        world = self.request.query_params.get('world')
+        qs = super(UserInWorldViewSet, self).get_queryset()
+
+        if user and world:
+            qs = qs.filter(user=user, world=world)
 
         return qs
