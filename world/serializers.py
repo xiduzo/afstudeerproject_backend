@@ -47,6 +47,15 @@ class PlainWorldSerializer(serializers.ModelSerializer):
             'guilds'
         )
 
+class OnlyWorldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = World
+        fields = (
+            'url',
+            'id',
+            'name'
+        )
+
 class UserInWorldSerializer(serializers.ModelSerializer):
     user = serializers.HyperlinkedRelatedField(
         view_name='user-detail',

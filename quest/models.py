@@ -3,11 +3,12 @@ from django.db.models import IntegerField, Model
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 from libs.models import UUIDModel
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Quest(UUIDModel):
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    description = HTMLField()
     experience = models.PositiveIntegerField()
     interaction_design = IntegerField(
         validators=[
@@ -51,7 +52,7 @@ class QuestObjective(UUIDModel):
     quest = models.ForeignKey('quest.Quest', related_name='objectives')
 
     name = models.CharField(max_length=250)
-    objective = models.TextField(blank=True, null=True)
+    objective = HTMLField()
     points = models.PositiveIntegerField()
 
     completed = models.BooleanField(default=False)

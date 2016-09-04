@@ -51,10 +51,13 @@ class GuildQuestViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         guild = self.request.query_params.get('guild')
+        quest = self.request.query_params.get('quest')
         qs = super(GuildQuestViewSet, self).get_queryset()
 
         if guild:
             qs = qs.filter(guild=guild)
+        if quest:
+            qs = qs.filter(quest=quest)
 
         return qs
 

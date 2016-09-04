@@ -18,6 +18,16 @@ from quest.models import Quest, QuestObjective
 
 from user.serializers import UserSerializer, PlainUserSerializer
 from quest.serializers import QuestSerializer, PlainQuestSerializer
+# from world.serializers import OnlyWorldSerializer
+
+class OnlyWorldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = World
+        fields = (
+            'url',
+            'id',
+            'name'
+        )
 
 class GuildHistoryUpdateSerializer(serializers.ModelSerializer):
     guild = serializers.HyperlinkedRelatedField(
@@ -108,9 +118,7 @@ class GuildSerializer(serializers.ModelSerializer):
     history_updates = serializers.SerializerMethodField()
     quests = GuildFullQuestSerializer(many=True, read_only=True);
 
-    world = serializers.PrimaryKeyRelatedField(
-        read_only=True
-    )
+    world = OnlyWorldSerializer()
 
     class Meta:
         model = Guild

@@ -18,6 +18,7 @@ class QuestObjectiveSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestObjective
         fields = (
+            'id',
             'url',
             'quest',
             'created_at',
