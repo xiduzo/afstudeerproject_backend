@@ -97,6 +97,7 @@ class GuildFullQuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = GuildQuest
         fields = (
+            'id',
             'url',
             'guild',
             'quest',
@@ -111,7 +112,11 @@ class GuildSerializer(serializers.ModelSerializer):
     def get_history_updates(self, obj):
         history_updates = GuildHistoryUpdate.objects.filter(guild=obj)
         history_updates = history_updates.order_by("-created_at")[:20]
-        return GuildFullHistoryUpdateSerializer(instance=history_updates, many=True, context=self.context).data
+        return GuildFullHistoryUpdateSerializer(
+                instance=history_updates,
+                many=True,
+                context=self.context
+            ).data
 
     members = serializers.SerializerMethodField()
     objectives = GuildObjectiveSerializer(many=True, read_only=True)
