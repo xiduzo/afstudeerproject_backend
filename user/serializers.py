@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'initials',
             'first_name',
+            'surname_prefix',
             'surname',
             'gender',
             'is_staff',
@@ -36,6 +37,7 @@ class PlainUserSerializer(serializers.ModelSerializer):
             'uid',
             'email',
             'first_name',
+            'surname_prefix',
             'surname',
         )
 
