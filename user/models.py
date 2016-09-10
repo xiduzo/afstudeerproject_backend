@@ -32,13 +32,15 @@ class User(UUIDModel):
     )
 
     def get_full_name():
-        return '{} {}'.format(
+        return '{} {} {}'.format(
             self.first_name,
+            self.surname_prefix,
             self.surname,
         )
 
     def __str__(self):
         return '{} {}'.format(
             self.first_name,
+            self.surname_prefix,
             self.surname,
         )

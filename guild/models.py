@@ -49,6 +49,16 @@ class GuildObjective(UUIDModel):
             self.name,
         )
 
+class GuildObjectiveAssignment(UUIDModel):
+    objective = models.ForeignKey('guild.GuildObjective', related_name='assignments')
+    user = models.ForeignKey('user.User', related_name='user_objectives')
+
+    def __str__(self):
+        return '{} assigned to {}'.format(
+            self.user.first_name,
+            self.objective.name
+        )
+
 class GuildHistoryUpdate(UUIDModel):
     guild = models.ForeignKey('guild.Guild', related_name='history_updates')
     user = models.ForeignKey('user.User', related_name='persons')

@@ -11,6 +11,7 @@ from guild.models import (
     GuildQuest,
     GuildObjective,
     GuildHistoryUpdate,
+    GuildObjectiveAssignment,
 )
 from guild.serializers import (
     GuildSerializer,
@@ -18,6 +19,7 @@ from guild.serializers import (
     GuildQuestSerializer,
     GuildObjectiveSerializer,
     GuildHistoryUpdateSerializer,
+    GuildFullObjectiveAssignmentSerializer,
 )
 
 # Create your views here.
@@ -76,5 +78,14 @@ class GuildHistoryUpdateViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super(GuildHistoryUpdateViewSet, self).get_queryset()
+
+        return qs
+
+class GuildObjectiveAssignmentViewSet(viewsets.ModelViewSet):
+    queryset = GuildObjectiveAssignment.objects.all()
+    serializer_class = GuildFullObjectiveAssignmentSerializer
+
+    def get_queryset(self):
+        qs = super(GuildObjectiveAssignmentViewSet, self).get_queryset()
 
         return qs

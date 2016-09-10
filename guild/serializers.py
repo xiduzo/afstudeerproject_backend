@@ -13,6 +13,7 @@ from guild.models import (
     GuildQuest,
     GuildObjective,
     GuildHistoryUpdate,
+    GuildObjectiveAssignment,
 )
 from quest.models import Quest, QuestObjective
 
@@ -66,6 +67,34 @@ class GuildFullHistoryUpdateSerializer(serializers.ModelSerializer):
             'action',
         )
 
+class GuildFullObjectiveAssignmentSerializer(serializers.ModelSerializer):
+    objective = serializers.HyperlinkedRelatedField(
+        view_name='guildobjective-detail',
+        queryset=GuildObjective.objects.all(),
+    )
+    user = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        queryset=User.objects.all(),
+    )
+
+    class Meta:
+        model = GuildObjectiveAssignment
+        fields = (
+            'id',
+            'objective',
+            'user',
+        )
+
+class GuildObjectiveAssignmentSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = GuildObjectiveAssignment
+        fields = (
+            'id',
+            'user',
+        )
+
 class GuildObjectiveSerializer(serializers.ModelSerializer):
 
     guild = serializers.HyperlinkedRelatedField(
@@ -73,9 +102,12 @@ class GuildObjectiveSerializer(serializers.ModelSerializer):
         queryset=Guild.objects.all(),
     )
 
+    assignments = GuildObjectiveAssignmentSerializer(many=True, read_only=True)
+
     class Meta:
         model = GuildObjective
         fields = (
+            'url',
             'id',
             'created_at',
             'guild',
@@ -83,6 +115,7 @@ class GuildObjectiveSerializer(serializers.ModelSerializer):
             'objective',
             'points',
             'completed',
+            'assignments',
             'completed_by',
             'completed_at',
         )
