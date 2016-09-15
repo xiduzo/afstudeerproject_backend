@@ -20,6 +20,7 @@ from guild.serializers import (
     GuildObjectiveSerializer,
     GuildHistoryUpdateSerializer,
     GuildFullObjectiveAssignmentSerializer,
+    NewGuildSerializer,
 )
 
 # Create your views here.
@@ -30,6 +31,15 @@ class GuildViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super(GuildViewSet, self).get_queryset()
+
+        return qs
+
+class NewGuildViewSet(viewsets.ModelViewSet):
+    queryset = Guild.objects.all()
+    serializer_class = NewGuildSerializer
+
+    def get_queryset(self):
+        qs = super(NewGuildViewSet, self).get_queryset()
 
         return qs
 

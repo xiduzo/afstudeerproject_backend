@@ -7,10 +7,12 @@ from .views import (
     GuildObjectiveViewSet,
     GuildHistoryUpdateViewSet,
     GuildObjectiveAssignmentViewSet,
+    NewGuildViewSet,
 )
 
 router = routers.DefaultRouter()
 router.register(r'guilds', GuildViewSet)
+router.register(r'newGuild', NewGuildViewSet)
 router.register(r'userInGuild', UserInGuildViewSet)
 router.register(r'guildQuest', GuildQuestViewSet)
 router.register(r'guildObjective', GuildObjectiveViewSet)

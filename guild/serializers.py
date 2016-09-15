@@ -21,6 +21,23 @@ from user.serializers import UserSerializer, PlainUserSerializer
 from quest.serializers import QuestSerializer, PlainQuestSerializer
 # from world.serializers import OnlyWorldSerializer
 
+class NewGuildSerializer(serializers.ModelSerializer):
+    world = serializers.HyperlinkedRelatedField(
+        view_name='world-detail',
+        queryset=World.objects.all(),
+    )
+
+    class Meta:
+        model = Guild
+        fields = (
+            'url',
+            'id',
+            'created_at',
+            'modified_at',
+            'name',
+            'world',
+        )
+
 class OnlyWorldSerializer(serializers.ModelSerializer):
     class Meta:
         model = World
