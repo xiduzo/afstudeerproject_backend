@@ -1,1 +1,1 @@
-web: gunicorn deploy.wsgi --pythonpath chipy_org --log-file -
+web: gunicorn platform_backend.wsgi --log-file -
