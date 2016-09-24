@@ -93,13 +93,6 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 # LOCAL
 # DATABASES = {
 #     'default': {
@@ -166,6 +159,7 @@ STATIC_URL = '/static/'
 # Cors settings
 # https://github.com/ottoyiu/django-cors-headers
 CORS_ORIGIN_WHITELIST = (
+    'http://sanderboer.nl',
     'localhost:3000',
     '*',
 )
