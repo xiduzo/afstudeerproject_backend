@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+import dj_database_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -105,12 +107,13 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 # HEROKU
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4lptoa7krkf8',
-        'USER': 'hrjffvukjphrbg',
-        'PASSWORD': 'lk8gshy9nSH7L0IhL6gRBvqN94',
-        'HOST': 'ec2-54-221-226-72.compute-1.amazonaws.com',
-        'PORT': '5432',
+        dj_database_url.config(default='postgres://hrjffvukjphrbg:lk8gshy9nSH7L0IhL6gRBvqN94@ec2-54-221-226-72.compute-1.amazonaws.com:5432/d4lptoa7krkf8')
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'd4lptoa7krkf8',
+        # 'USER': 'hrjffvukjphrbg',
+        # 'PASSWORD': 'lk8gshy9nSH7L0IhL6gRBvqN94',
+        # 'HOST': 'ec2-54-221-226-72.compute-1.amazonaws.com',
+        # 'PORT': '5432',
     }
 }
 
