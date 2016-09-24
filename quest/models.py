@@ -7,6 +7,7 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 class Quest(UUIDModel):
+    moodle_link = models.URLField(blank=True, null=True)
     name = models.CharField(max_length=200)
     description = HTMLField()
     experience = models.PositiveIntegerField()
@@ -16,25 +17,13 @@ class Quest(UUIDModel):
             MinValueValidator(0)
         ]
     )
-    visual_interface_design = IntegerField(
+    visual_design = IntegerField(
         validators=[
             MaxValueValidator(100),
             MinValueValidator(0)
         ]
     )
-    frontend_development = IntegerField(
-        validators=[
-            MaxValueValidator(100),
-            MinValueValidator(0)
-        ]
-    )
-    content_management = IntegerField(
-        validators=[
-            MaxValueValidator(100),
-            MinValueValidator(0)
-        ]
-    )
-    project_management = IntegerField(
+    techniek = IntegerField(
         validators=[
             MaxValueValidator(100),
             MinValueValidator(0)
@@ -53,7 +42,6 @@ class QuestObjective(UUIDModel):
 
     name = models.CharField(max_length=250)
     objective = HTMLField()
-    points = models.PositiveIntegerField()
 
     completed = models.BooleanField(default=False)
 

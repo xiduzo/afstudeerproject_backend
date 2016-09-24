@@ -48,10 +48,8 @@ class QuestSerializer(serializers.ModelSerializer):
             'description',
             'experience',
             'interaction_design',
-            'visual_interface_design',
-            'frontend_development',
-            'content_management',
-            'project_management',
+            'visual_design',
+            'techniek',
             'active',
             'objectives',
         )
