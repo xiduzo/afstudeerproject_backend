@@ -90,13 +90,26 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 #     }
 # }
 
+# LOCAL
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'cmd',
+#         'USER': 'cmd',
+#         'PASSWORD': 'cmd',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
+# HEROKU
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cmd',
-        'USER': 'cmd',
-        'PASSWORD': 'cmd',
-        'HOST': '127.0.0.1',
+        'NAME': 'd4lptoa7krkf8',
+        'USER': 'hrjffvukjphrbg',
+        'PASSWORD': 'lk8gshy9nSH7L0IhL6gRBvqN94',
+        'HOST': 'ec2-54-221-226-72.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
