@@ -106,14 +106,7 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 
 # HEROKU
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4lptoa7krkf8',
-        'USER': 'hrjffvukjphrbg',
-        'PASSWORD': 'lk8gshy9nSH7L0IhL6gRBvqN94',
-        'HOST': 'ec2-54-221-226-72.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default='postgres://hrjffvukjphrbg:lk8gshy9nSH7L0IhL6gRBvqN94@ec2-54-221-226-72.compute-1.amazonaws.com:5432/d4lptoa7krkf8')
 }
 
 
