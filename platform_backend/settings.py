@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-import dj_database_url
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,7 +25,9 @@ SECRET_KEY = '+%=@8^!ms6gv6-b868rny4!on*6@o8_snhszquc-(&6n-pr9t%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'murmuring-citadel-56488.herokuapp.com',
+]
 
 
 # Application definition
@@ -106,7 +106,14 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 
 # HEROKU
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://hrjffvukjphrbg:lk8gshy9nSH7L0IhL6gRBvqN94@ec2-54-221-226-72.compute-1.amazonaws.com:5432/d4lptoa7krkf8')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd4lptoa7krkf8',
+        'USER': 'hrjffvukjphrbg',
+        'PASSWORD': 'lk8gshy9nSH7L0IhL6gRBvqN94',
+        'HOST': 'ec2-54-221-226-72.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
 }
 
 
@@ -151,5 +158,6 @@ STATIC_URL = '/static/'
 # Cors settings
 # https://github.com/ottoyiu/django-cors-headers
 CORS_ORIGIN_WHITELIST = (
-        'localhost:3000',
-    )
+    'localhost:3000',
+    '*',
+)
