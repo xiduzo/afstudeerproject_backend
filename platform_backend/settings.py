@@ -159,7 +159,6 @@ STATIC_URL = '/static/'
 # Cors settings
 # https://github.com/ottoyiu/django-cors-headers
 CORS_ORIGIN_WHITELIST = (
-    'http://sanderboer.nl',
+    'sanderboer.nl',
     'localhost:3000',
-    '*',
 )
