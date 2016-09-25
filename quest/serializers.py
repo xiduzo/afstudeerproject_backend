@@ -24,7 +24,6 @@ class QuestObjectiveSerializer(serializers.ModelSerializer):
             'created_at',
             'name',
             'objective',
-            'points',
             'completed',
         )
 
