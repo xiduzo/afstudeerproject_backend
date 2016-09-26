@@ -26,6 +26,7 @@ class GuildQuest(UUIDModel):
 
     completed = models.BooleanField(default=False)
     completed_at = models.DateTimeField(blank=True, null=True)
+    grade = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return '{} for {}'.format(

@@ -40,6 +40,7 @@ class QuestSerializer(serializers.ModelSerializer):
         fields = (
             'url',
             'id',
+            'moodle_link',
             'created_at',
             'modified_at',
             'world',
