@@ -31,6 +31,7 @@ class Quest(UUIDModel):
     )
     world = models.ForeignKey('world.World', related_name='quests')
     active = models.BooleanField(default=False)
+    gradable = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}'.format(

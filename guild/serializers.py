@@ -65,6 +65,7 @@ class GuildHistoryUpdateSerializer(serializers.ModelSerializer):
             'user',
             'guild',
             'action',
+            'action_type',
         )
 
 class GuildFullHistoryUpdateSerializer(serializers.ModelSerializer):
@@ -82,6 +83,7 @@ class GuildFullHistoryUpdateSerializer(serializers.ModelSerializer):
             'user',
             'guild',
             'action',
+            'action_type',
         )
 
 class GuildFullObjectiveAssignmentSerializer(serializers.ModelSerializer):
@@ -152,6 +154,7 @@ class GuildFullQuestSerializer(serializers.ModelSerializer):
             'guild',
             'quest',
             'completed',
+            'grade',
         )
 
 class GuildSerializer(serializers.ModelSerializer):
@@ -161,7 +164,7 @@ class GuildSerializer(serializers.ModelSerializer):
 
     def get_history_updates(self, obj):
         history_updates = GuildHistoryUpdate.objects.filter(guild=obj)
-        history_updates = history_updates.order_by("-created_at")[:20]
+        history_updates = history_updates.order_by("-created_at")[:50]
         return GuildFullHistoryUpdateSerializer(
                 instance=history_updates,
                 many=True,
@@ -261,4 +264,5 @@ class GuildQuestSerializer(serializers.ModelSerializer):
             'guild',
             'quest',
             'completed',
+            'grade',
         )

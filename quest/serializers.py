@@ -51,6 +51,7 @@ class QuestSerializer(serializers.ModelSerializer):
             'visual_design',
             'techniek',
             'active',
+            'gradable',
             'objectives',
         )
 

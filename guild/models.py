@@ -26,7 +26,7 @@ class GuildQuest(UUIDModel):
 
     completed = models.BooleanField(default=False)
     completed_at = models.DateTimeField(blank=True, null=True)
-    grade = models.IntegerField(blank=True, null=True)
+    grade = models.PositiveIntegerField(blank=True, null=True, default=None)
 
     def __str__(self):
         return '{} for {}'.format(
@@ -61,10 +61,24 @@ class GuildObjectiveAssignment(UUIDModel):
         )
 
 class GuildHistoryUpdate(UUIDModel):
+    ACTION__TYPES = (
+        (1, 'added task'),
+        (2, 'removed task'),
+        (3, 'assigned'),
+        (4, 'remove assigned'),
+        (5, 'completed'),
+        (6, 'remove completed'),
+        (7, 'graded'),
+        (8, 'regraded'),
+        (9, 'completed assessment'),
+        (10, 'remove completed assessment'),
+    )
+
     guild = models.ForeignKey('guild.Guild', related_name='history_updates')
     user = models.ForeignKey('user.User', related_name='persons')
 
     action = models.TextField(blank=False, null=False)
+    action_type = models.CharField(max_length=2, choices=ACTION__TYPES)
 
     def __str__(self):
         return '{} {}'.format(
