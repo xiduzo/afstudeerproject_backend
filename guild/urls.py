@@ -6,6 +6,7 @@ from .views import (
     GuildQuestViewSet,
     GuildObjectiveViewSet,
     GuildHistoryUpdateViewSet,
+    GuildFullHistoryUpdateViewSet,
     GuildObjectiveAssignmentViewSet,
     NewGuildViewSet,
 )
@@ -18,5 +19,6 @@ router.register(r'guildQuest', GuildQuestViewSet)
 router.register(r'guildObjective', GuildObjectiveViewSet)
 router.register(r'guildObjectiveAssignment', GuildObjectiveAssignmentViewSet)
 router.register(r'guildHistory', GuildHistoryUpdateViewSet)
+router.register(r'guildFullHistory', GuildFullHistoryUpdateViewSet)
 
 urlpatterns = router.urls

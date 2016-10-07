@@ -19,6 +19,7 @@ from guild.serializers import (
     GuildQuestSerializer,
     GuildObjectiveSerializer,
     GuildHistoryUpdateSerializer,
+    GuildFullHistoryUpdateSerializer,
     GuildFullObjectiveAssignmentSerializer,
     NewGuildSerializer,
 )
@@ -84,11 +85,33 @@ class GuildObjectiveViewSet(viewsets.ModelViewSet):
 
 class GuildHistoryUpdateViewSet(viewsets.ModelViewSet):
     queryset = GuildHistoryUpdate.objects.all()
+
     serializer_class = GuildHistoryUpdateSerializer
 
     def get_queryset(self):
+        guild = self.request.query_params.get('guild')
         qs = super(GuildHistoryUpdateViewSet, self).get_queryset()
 
+        if guild:
+            qs = qs.filter(guild=guild)
+
+        return qs
+
+class GuildFullHistoryUpdateViewSet(viewsets.ModelViewSet):
+    queryset = GuildHistoryUpdate.objects.all()
+
+    serializer_class = GuildFullHistoryUpdateSerializer
+
+    def get_queryset(self):
+        guild = self.request.query_params.get('guild')
+        start = int(self.request.query_params.get('start'))
+        qs = super(GuildFullHistoryUpdateViewSet, self).get_queryset()
+
+        if guild:
+            qs = qs.filter(guild=guild)
+
+        if start:
+            return qs[start:start+25]
         return qs
 
 class GuildObjectiveAssignmentViewSet(viewsets.ModelViewSet):
