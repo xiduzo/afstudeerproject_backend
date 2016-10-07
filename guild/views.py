@@ -108,7 +108,7 @@ class GuildFullHistoryUpdateViewSet(viewsets.ModelViewSet):
         qs = super(GuildFullHistoryUpdateViewSet, self).get_queryset()
 
         if guild:
-            qs = qs.filter(guild=guild)
+            qs = qs.filter(guild=guild).order_by("-created_at")
 
         if start:
             return qs[start:start+25]

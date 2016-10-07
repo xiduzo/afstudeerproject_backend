@@ -66,6 +66,7 @@ class GuildHistoryUpdateSerializer(serializers.ModelSerializer):
             'guild',
             'action',
             'action_type',
+            'about',
         )
 
 class GuildFullHistoryUpdateSerializer(serializers.ModelSerializer):
@@ -84,6 +85,7 @@ class GuildFullHistoryUpdateSerializer(serializers.ModelSerializer):
             'guild',
             'action',
             'action_type',
+            'about',
         )
 
 class GuildFullObjectiveAssignmentSerializer(serializers.ModelSerializer):
