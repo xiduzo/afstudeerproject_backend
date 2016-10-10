@@ -7,6 +7,8 @@ class Guild(UUIDModel):
 
     world = models.ForeignKey('world.World', related_name='guilds')
 
+    accepted_rules = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
 

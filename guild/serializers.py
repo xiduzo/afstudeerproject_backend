@@ -193,6 +193,7 @@ class GuildSerializer(serializers.ModelSerializer):
             'objectives',
             'history_updates',
             'quests',
+            'accepted_rules',
         )
 
 class PlainGuildSerializer(serializers.ModelSerializer):

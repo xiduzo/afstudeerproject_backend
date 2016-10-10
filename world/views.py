@@ -5,8 +5,17 @@ from rest_framework import (
     mixins,
     status
 )
-from world.models import World, UserInWorld
-from world.serializers import WorldSerializer, UserInWorldSerializer
+from world.models import (
+    World,
+    UserInWorld,
+    WorldRule,
+)
+
+from world.serializers import (
+    WorldSerializer,
+    UserInWorldSerializer,
+    WorldRuleSerializer,
+)
 
 # Create your views here.
 class WorldViewSet(viewsets.ModelViewSet):
@@ -31,5 +40,14 @@ class UserInWorldViewSet(viewsets.ModelViewSet):
 
         if user and world:
             qs = qs.filter(user=user, world=world)
+
+        return qs
+
+class WorldRuleViewSet(viewsets.ModelViewSet):
+    queryset = WorldRule.objects.all()
+    serializer_class = WorldRuleSerializer
+
+    def get_queryset(self):
+        qs = super(WorldRuleViewSet, self).get_queryset()
 
         return qs
