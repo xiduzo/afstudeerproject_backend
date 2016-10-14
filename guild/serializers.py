@@ -9,6 +9,7 @@ from user.models import User
 from world.models import World
 from guild.models import (
     Guild,
+    GuildRule,
     UserInGuild,
     GuildQuest,
     GuildObjective,
@@ -20,6 +21,17 @@ from quest.models import Quest, QuestObjective
 from user.serializers import UserSerializer, PlainUserSerializer
 from quest.serializers import QuestSerializer, PlainQuestSerializer
 # from world.serializers import OnlyWorldSerializer
+
+class GuildRuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GuildRule
+        fields = (
+            'id',
+            'guild',
+            'rule',
+            'rule_type',
+            'points',
+        )
 
 class NewGuildSerializer(serializers.ModelSerializer):
     world = serializers.HyperlinkedRelatedField(
@@ -173,10 +185,12 @@ class GuildSerializer(serializers.ModelSerializer):
                 context=self.context
             ).data
 
+
     members = serializers.SerializerMethodField()
     objectives = GuildObjectiveSerializer(many=True, read_only=True)
     history_updates = serializers.SerializerMethodField()
     quests = GuildFullQuestSerializer(many=True, read_only=True);
+    rules = GuildRuleSerializer(many=True, read_only=True);
 
     world = OnlyWorldSerializer()
 
@@ -193,6 +207,7 @@ class GuildSerializer(serializers.ModelSerializer):
             'objectives',
             'history_updates',
             'quests',
+            'rules',
             'accepted_rules',
         )
 

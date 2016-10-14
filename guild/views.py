@@ -7,6 +7,7 @@ from rest_framework import (
 )
 from guild.models import (
     Guild,
+    GuildRule,
     UserInGuild,
     GuildQuest,
     GuildObjective,
@@ -15,6 +16,7 @@ from guild.models import (
 )
 from guild.serializers import (
     GuildSerializer,
+    GuildRuleSerializer,
     UserInGuildSerializer,
     GuildQuestSerializer,
     GuildObjectiveSerializer,
@@ -23,6 +25,15 @@ from guild.serializers import (
     GuildFullObjectiveAssignmentSerializer,
     NewGuildSerializer,
 )
+
+class GuildRuleViewSet(viewsets.ModelViewSet):
+    queryset = GuildRule.objects.all()
+    serializer_class = GuildRuleSerializer
+
+    def get_queryset(self):
+        qs = super(GuildRuleViewSet, self).get_queryset()
+
+        return qs
 
 # Create your views here.
 class GuildViewSet(viewsets.ModelViewSet):

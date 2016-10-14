@@ -2,6 +2,7 @@ from rest_framework import routers
 
 from .views import (
     GuildViewSet,
+    GuildRuleViewSet,
     UserInGuildViewSet,
     GuildQuestViewSet,
     GuildObjectiveViewSet,
@@ -20,5 +21,6 @@ router.register(r'guildObjective', GuildObjectiveViewSet)
 router.register(r'guildObjectiveAssignment', GuildObjectiveAssignmentViewSet)
 router.register(r'guildHistory', GuildHistoryUpdateViewSet)
 router.register(r'guildFullHistory', GuildFullHistoryUpdateViewSet)
+router.register(r'guildRules', GuildRuleViewSet)
 
 urlpatterns = router.urls

@@ -89,3 +89,17 @@ class GuildHistoryUpdate(UUIDModel):
             self.user.name,
             self.action
         )
+
+class GuildRule(UUIDModel):
+    RULE__TYPES = (
+        (1, 'houding'),
+        (2, 'functioneren binnen het team'),
+        (3, 'kennisontwikkeling'),
+        (4, 'verantwoording'),
+    )
+
+    guild = models.ForeignKey('guild.Guild', related_name='rules')
+    rule = models.TextField(blank=False, null=False)
+    points = models.IntegerField(blank=False, null=False)
+
+    rule_type = models.CharField(max_length=2, choices=RULE__TYPES)
