@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'user',
     'world',
     'guild',
-    'quest'
+    'quest',
+    'rules'
 ]
 
 MIDDLEWARE_CLASSES = [

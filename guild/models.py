@@ -7,8 +7,6 @@ class Guild(UUIDModel):
 
     world = models.ForeignKey('world.World', related_name='guilds')
 
-    accepted_rules = models.BooleanField(default=False)
-
     def __str__(self):
         return self.name
 
@@ -103,3 +101,15 @@ class GuildRule(UUIDModel):
     points = models.IntegerField(blank=False, null=False)
 
     rule_type = models.CharField(max_length=2, choices=RULE__TYPES)
+
+    def __str__(self):
+        return '{}: {}'.format(
+            self.guild.name,
+            self.rule
+        )
+
+class GuildRuleEndorsment(UUIDModel):
+    rule = models.ForeignKey('guild.GuildRule', related_name='endorsements')
+    user = models.ForeignKey('user.User', related_name="endorsed")
+    endorsed_by = models.ForeignKey('user.User', related_name="endorser", null= True, blank=True)
+    week = models.IntegerField(blank=False, null=False)

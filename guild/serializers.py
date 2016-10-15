@@ -10,6 +10,7 @@ from world.models import World
 from guild.models import (
     Guild,
     GuildRule,
+    GuildRuleEndorsment,
     UserInGuild,
     GuildQuest,
     GuildObjective,
@@ -22,15 +23,35 @@ from user.serializers import UserSerializer, PlainUserSerializer
 from quest.serializers import QuestSerializer, PlainQuestSerializer
 # from world.serializers import OnlyWorldSerializer
 
+class GuildRuleEndorsmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GuildRuleEndorsment
+        fields = (
+            'id',
+            'rule',
+            'user',
+            'endorsed_by',
+            'week',
+        )
+
 class GuildRuleSerializer(serializers.ModelSerializer):
+
+    def get_endorsements(self, obj):
+        endorsements = GuildRuleEndorsment.objects.filter(rule=obj)
+        return GuildRuleEndorsmentSerializer(instance=endorsements, many=True, context=self.context).data
+
+    endorsements = serializers.SerializerMethodField()
+
     class Meta:
         model = GuildRule
         fields = (
+            'url',
             'id',
             'guild',
             'rule',
             'rule_type',
             'points',
+            'endorsements',
         )
 
 class NewGuildSerializer(serializers.ModelSerializer):
@@ -208,7 +229,6 @@ class GuildSerializer(serializers.ModelSerializer):
             'history_updates',
             'quests',
             'rules',
-            'accepted_rules',
         )
 
 class PlainGuildSerializer(serializers.ModelSerializer):

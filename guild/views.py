@@ -8,6 +8,7 @@ from rest_framework import (
 from guild.models import (
     Guild,
     GuildRule,
+    GuildRuleEndorsment,
     UserInGuild,
     GuildQuest,
     GuildObjective,
@@ -17,6 +18,7 @@ from guild.models import (
 from guild.serializers import (
     GuildSerializer,
     GuildRuleSerializer,
+    GuildRuleEndorsmentSerializer,
     UserInGuildSerializer,
     GuildQuestSerializer,
     GuildObjectiveSerializer,
@@ -32,6 +34,15 @@ class GuildRuleViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super(GuildRuleViewSet, self).get_queryset()
+
+        return qs
+
+class GuildRuleEndorsmentViewSet(viewsets.ModelViewSet):
+    queryset = GuildRuleEndorsment.objects.all()
+    serializer_class = GuildRuleEndorsmentSerializer
+
+    def get_queryset(self):
+        qs = super(GuildRuleEndorsmentViewSet, self).get_queryset()
 
         return qs
 

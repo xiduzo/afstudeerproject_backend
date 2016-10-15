@@ -4,7 +4,6 @@ from django.db.models import Sum
 from .models import (
     World,
     UserInWorld,
-    WorldRule,
 )
 
 from quest.models import Quest
@@ -14,25 +13,9 @@ from quest.serializers import QuestSerializer
 from user.serializers import UserSerializer, GamemasterSerializer
 from user.models import User
 
-class WorldRuleSerializer(serializers.ModelSerializer):
-    world = serializers.HyperlinkedRelatedField(
-        view_name='world-detail',
-        queryset=World.objects.all(),
-    )
-    class Meta:
-        model = WorldRule
-        fields = (
-            'id',
-            'world',
-            'rule',
-            'points',
-            'rule_type',
-        )
-
 class WorldSerializer(serializers.ModelSerializer):
     guilds = GuildSerializer(many=True, read_only=True)
     quests = QuestSerializer(many=True, read_only=True)
-    rules = WorldRuleSerializer(many=True, read_only=True)
 
     def get_gamemasters(self, obj):
         gamemasters = User.objects.filter(worlds__world=obj)
@@ -52,7 +35,6 @@ class WorldSerializer(serializers.ModelSerializer):
             'gamemasters',
             'quests',
             'guilds',
-            'rules',
         )
 
 class PlainWorldSerializer(serializers.ModelSerializer):
