@@ -19,6 +19,7 @@ from guild.serializers import (
     GuildSerializer,
     GuildRuleSerializer,
     GuildRuleEndorsmentSerializer,
+    NewGuildRuleEndorsmentSerializer,
     UserInGuildSerializer,
     GuildQuestSerializer,
     GuildObjectiveSerializer,
@@ -43,6 +44,15 @@ class GuildRuleEndorsmentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super(GuildRuleEndorsmentViewSet, self).get_queryset()
+
+        return qs
+
+class NewGuildRuleEndorsmentViewSet(viewsets.ModelViewSet):
+    queryset = GuildRuleEndorsment.objects.all()
+    serializer_class = NewGuildRuleEndorsmentSerializer
+
+    def get_queryset(self):
+        qs = super(NewGuildRuleEndorsmentViewSet, self).get_queryset()
 
         return qs
 
