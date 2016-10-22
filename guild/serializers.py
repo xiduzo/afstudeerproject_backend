@@ -24,7 +24,6 @@ from quest.serializers import QuestSerializer, PlainQuestSerializer
 # from world.serializers import OnlyWorldSerializer
 
 class GuildRuleSerializer(serializers.ModelSerializer):
-
     def get_endorsements(self, obj):
         endorsements = GuildRuleEndorsment.objects.filter(rule=obj)
         return GuildRuleEndorsmentSerializer(instance=endorsements, many=True, context=self.context).data
