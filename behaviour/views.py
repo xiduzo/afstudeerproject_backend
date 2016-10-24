@@ -9,10 +9,14 @@ from rest_framework import (
 from .models import (
     Behaviour,
     Reward,
+    BehaviourRupeeReward,
+    RewardRupeeCost,
 )
 from .serializers import (
     BehaviourSerializer,
     RewardSerializer,
+    BehaviourRupeeRewardSerializer,
+    RewardRupeeCostSerializer,
 )
 
 class BehaviourViewset(viewsets.ModelViewSet):
@@ -30,5 +34,23 @@ class RewardViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super(RewardViewset, self).get_queryset()
+
+        return qs
+
+class BehaviourRupeeRewardViewset(viewsets.ModelViewSet):
+    queryset = BehaviourRupeeReward.objects.all()
+    serializer_class = BehaviourRupeeRewardSerializer
+
+    def get_queryset(self):
+        qs = super(BehaviourRupeeRewardViewset, self).get_queryset()
+
+        return qs
+
+class RewardRupeeCostViewset(viewsets.ModelViewSet):
+    queryset = RewardRupeeCost.objects.all()
+    serializer_class = RewardRupeeCostSerializer
+
+    def get_queryset(self):
+        qs = super(RewardRupeeCostViewset, self).get_queryset()
 
         return qs
