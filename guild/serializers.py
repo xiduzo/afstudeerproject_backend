@@ -12,6 +12,7 @@ from guild.models import (
     GuildRule,
     GuildRuleEndorsment,
     UserInGuild,
+    UserGuildRupees,
     GuildQuest,
     GuildObjective,
     GuildHistoryUpdate,
@@ -215,10 +216,59 @@ class GuildFullQuestSerializer(serializers.ModelSerializer):
             'grade',
         )
 
+class UserGuildRupeesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserGuildRupees
+        fields = (
+            'id',
+            'user_in_guild',
+            'rupee',
+            'amount',
+        )
+
+class UserInGuildSerializer(serializers.ModelSerializer):
+    user = serializers.HyperlinkedRelatedField(
+        view_name='user-detail',
+        queryset=User.objects.all(),
+    )
+    guild = serializers.HyperlinkedRelatedField(
+        view_name='guild-detail',
+        queryset=Guild.objects.all(),
+    )
+    class Meta:
+        model = UserInGuild
+        fields = (
+            'url',
+            'guild',
+            'user',
+        )
+
+class UserInGuildFullSerializer(serializers.ModelSerializer):
+    def get_rupees(self, obj):
+        user_in_guild = UserGuildRupees.objects.filter(user_in_guild=obj)
+        return UserGuildRupeesSerializer(instance=user_in_guild, many=True, context=self.context).data
+
+    rupees = serializers.SerializerMethodField()
+
+    user = UserSerializer()
+    guild = serializers.HyperlinkedRelatedField(
+        view_name='guild-detail',
+        queryset=Guild.objects.all(),
+    )
+    class Meta:
+        model = UserInGuild
+        fields = (
+            'url',
+            'user',
+            'guild',
+            'rupees',
+        )
+
+
 class GuildSerializer(serializers.ModelSerializer):
     def get_members(self, obj):
-        users = User.objects.filter(guilds__guild=obj)
-        return PlainUserSerializer(instance=users, many=True, context=self.context).data
+        users = UserInGuild.objects.filter(guild=obj)
+        return UserInGuildFullSerializer(instance=users, many=True, context=self.context).data
 
     def get_history_updates(self, obj):
         history_updates = GuildHistoryUpdate.objects.filter(guild=obj)
@@ -265,23 +315,6 @@ class PlainGuildSerializer(serializers.ModelSerializer):
             'modified_at',
             'name',
             'world',
-        )
-
-class UserInGuildSerializer(serializers.ModelSerializer):
-    user = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        queryset=User.objects.all(),
-    )
-    guild = serializers.HyperlinkedRelatedField(
-        view_name='guild-detail',
-        queryset=Guild.objects.all(),
-    )
-    class Meta:
-        model = UserInGuild
-        fields = (
-            'url',
-            'user',
-            'guild',
         )
 
 class UserGuild(serializers.ModelSerializer):

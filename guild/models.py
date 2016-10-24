@@ -20,6 +20,18 @@ class UserInGuild(UUIDModel):
             self.guild,
         )
 
+class UserGuildRupees(UUIDModel):
+    RUPEE__TYPES = (
+        (1, 'ruby'),
+        (2, 'sapphire'),
+        (3, 'emerald'),
+        (4, 'amethyst'),
+    )
+
+    user_in_guild = models.ForeignKey('guild.UserInGuild', related_name='rupees')
+    rupee = models.CharField(max_length=2, choices=RUPEE__TYPES)
+    amount = models.IntegerField(blank=False, null=False)
+
 class GuildQuest(UUIDModel):
     guild = models.ForeignKey('guild.Guild', related_name='quests')
     quest = models.ForeignKey('quest.Quest', related_name='guilds')
