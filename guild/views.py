@@ -10,6 +10,7 @@ from guild.models import (
     GuildRule,
     GuildRuleEndorsment,
     UserInGuild,
+    UserGuildRupees,
     GuildQuest,
     GuildObjective,
     GuildHistoryUpdate,
@@ -21,6 +22,7 @@ from guild.serializers import (
     GuildRuleEndorsmentSerializer,
     NewGuildRuleEndorsmentSerializer,
     UserInGuildSerializer,
+    UserGuildRupeesSerializer,
     GuildQuestSerializer,
     GuildObjectiveSerializer,
     GuildHistoryUpdateSerializer,
@@ -89,6 +91,16 @@ class UserInGuildViewSet(viewsets.ModelViewSet):
             qs = qs.filter(user=user, guild=guild)
 
         return qs
+
+class UserGuildRupeesViewSet(viewsets.ModelViewSet):
+    queryset = UserGuildRupees.objects.all()
+    serializer_class = UserGuildRupeesSerializer
+
+    def get_queryset(self):
+        qs = super(UserGuildRupeesViewSet, self).get_queryset()
+
+        return qs
+
 
 class GuildQuestViewSet(viewsets.ModelViewSet):
     queryset = GuildQuest.objects.all()

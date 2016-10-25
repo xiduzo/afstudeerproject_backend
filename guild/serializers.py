@@ -238,6 +238,7 @@ class UserInGuildSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInGuild
         fields = (
+            'id',
             'url',
             'guild',
             'user',
@@ -258,6 +259,7 @@ class UserInGuildFullSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInGuild
         fields = (
+            'id',
             'url',
             'user',
             'guild',

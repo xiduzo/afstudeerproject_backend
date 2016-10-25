@@ -12,6 +12,7 @@ from .views import (
     GuildFullHistoryUpdateViewSet,
     GuildObjectiveAssignmentViewSet,
     NewGuildViewSet,
+    UserGuildRupeesViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -26,5 +27,6 @@ router.register(r'guildFullHistory', GuildFullHistoryUpdateViewSet)
 router.register(r'guildRules', GuildRuleViewSet)
 router.register(r'guildRulesEndorsments', GuildRuleEndorsmentViewSet, base_name='endorsements')
 router.register(r'newGuildRulesEndorsments', NewGuildRuleEndorsmentViewSet)
+router.register(r'userGuildRupees', UserGuildRupeesViewSet)
 
 urlpatterns = router.urls
