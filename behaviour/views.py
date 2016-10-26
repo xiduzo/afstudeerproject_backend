@@ -6,6 +6,8 @@ from rest_framework import (
     status
 )
 
+from rest_framework.renderers import UnicodeJSONRenderer
+
 from .models import (
     Behaviour,
     Reward,
@@ -31,11 +33,16 @@ class BehaviourViewset(viewsets.ModelViewSet):
 class RewardViewset(viewsets.ModelViewSet):
     queryset = Reward.objects.all()
     serializer_class = RewardSerializer
+     renderer_classes = (UnicodeJSONRenderer)
 
     def get_queryset(self):
         qs = super(RewardViewset, self).get_queryset()
 
         return qs
+
+    def get(self, request, format=None):
+        reward = Reward.objects.all()
+        return Response(reward)
 
 class BehaviourRupeeRewardViewset(viewsets.ModelViewSet):
     queryset = BehaviourRupeeReward.objects.all()
