@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-from rest_framework.renderers import *
-
 # For styling etc
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'static/media')
@@ -59,17 +57,6 @@ INSTALLED_APPS = [
     'rules',
     'behaviour',
 ]
-
-REST_FRAMEWORK = {
-    #this bit makes the magic.
-    'DEFAULT_RENDERER_CLASSES': (
-         #UnicodeJSONRenderer has an ensure_ascii = False attribute,
-         #thus it will not escape characters.
-        'rest_framework.renderers.UnicodeJSONRenderer',
-         #You only need to keep this one if you're using the browsable API
-        'rest_framework.renderers.BrowsableAPIRenderer',
-    )
-}
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
