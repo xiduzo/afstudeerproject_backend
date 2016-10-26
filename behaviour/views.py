@@ -3,8 +3,7 @@ from rest_framework import (
     viewsets,
     response,
     mixins,
-    status,
-    renderers
+    status
 )
 
 from .models import (
