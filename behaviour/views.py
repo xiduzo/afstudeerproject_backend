@@ -6,7 +6,7 @@ from rest_framework import (
     status
 )
 
-from rest_framework.renderers import UnicodeJSONRenderer
+from rest_framework.renderers import JSONRenderer
 
 from .models import (
     Behaviour,
@@ -33,7 +33,7 @@ class BehaviourViewset(viewsets.ModelViewSet):
 class RewardViewset(viewsets.ModelViewSet):
     queryset = Reward.objects.all()
     serializer_class = RewardSerializer
-    renderer_classes = (UnicodeJSONRenderer)
+    renderer_classes = (JSONRenderer)
 
     def get_queryset(self):
         qs = super(RewardViewset, self).get_queryset()
