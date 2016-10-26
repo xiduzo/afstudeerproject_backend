@@ -12,10 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-from rest_framework.renderers import (
-    UnicodeJSONRenderer,
-    BrowsableAPIRenderer
-)
+from rest_framework.renderers import *
 
 # For styling etc
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
