@@ -68,7 +68,7 @@ class RewardSerializer(serializers.ModelSerializer):
         fields = (
             'url',
             'id',
-            'reward',
+            # 'reward',
             'reward_type',
             'points',
             'cost'
