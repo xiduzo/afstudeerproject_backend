@@ -33,7 +33,7 @@ class BehaviourViewset(viewsets.ModelViewSet):
 class RewardViewset(viewsets.ModelViewSet):
     queryset = Reward.objects.all()
     serializer_class = RewardSerializer
-     renderer_classes = (UnicodeJSONRenderer)
+    renderer_classes = (UnicodeJSONRenderer)
 
     def get_queryset(self):
         qs = super(RewardViewset, self).get_queryset()
