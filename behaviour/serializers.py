@@ -62,13 +62,14 @@ class RewardSerializer(serializers.ModelSerializer):
     #     return RewardRupeeCostSerializer(instance=reward, many=True, context=self.context).data
     #
     # cost = serializers.SerializerMethodField()
+    reward = "test"
 
     class Meta:
         model = Reward
         fields = (
             'url',
             'id',
-            # 'reward',
+            'reward',
             'reward_type',
             'points',
             # 'cost'
