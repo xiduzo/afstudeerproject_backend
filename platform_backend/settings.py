@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+from rest_framework.renderers import (
+    UnicodeJSONRenderer,
+    BrowsableAPIRenderer
+)
+
 # For styling etc
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'static/media')
