@@ -65,6 +65,7 @@ class GuildRuleEndorsmentSerializer(serializers.ModelSerializer):
             'user',
             'endorsed_by',
             'week',
+            'rating',
         )
 
 class NewGuildRuleEndorsmentSerializer(serializers.ModelSerializer):
@@ -296,8 +297,9 @@ class GuildSerializer(serializers.ModelSerializer):
             'url',
             'id',
             'created_at',
-            'modified_at',
             'name',
+            'trello_board',
+            'trello_done_list',
             'world',
             'members',
             'objectives',
@@ -315,6 +317,8 @@ class PlainGuildSerializer(serializers.ModelSerializer):
             'id',
             'created_at',
             'modified_at',
+            'trello_board',
+            'trello_done_list',
             'name',
             'world',
         )

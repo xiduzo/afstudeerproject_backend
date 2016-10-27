@@ -57,12 +57,11 @@ class RewardRupeeCostSerializer(serializers.ModelSerializer):
         )
 
 class RewardSerializer(serializers.ModelSerializer):
-    # def get_cost(self, obj):
-    #     reward = RewardRupeeCost.objects.filter(reward=obj)
-    #     return RewardRupeeCostSerializer(instance=reward, many=True, context=self.context).data
-    #
-    # cost = serializers.SerializerMethodField()
-    reward = "test"
+    def get_cost(self, obj):
+        reward = RewardRupeeCost.objects.filter(reward=obj)
+        return RewardRupeeCostSerializer(instance=reward, many=True, context=self.context).data
+
+    cost = serializers.SerializerMethodField()
 
     class Meta:
         model = Reward
@@ -72,5 +71,5 @@ class RewardSerializer(serializers.ModelSerializer):
             'reward',
             'reward_type',
             'points',
-            # 'cost'
+            'cost'
         )

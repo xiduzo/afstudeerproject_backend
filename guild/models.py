@@ -6,6 +6,8 @@ class Guild(UUIDModel):
     name = models.CharField( max_length=100)
 
     world = models.ForeignKey('world.World', related_name='guilds')
+    trello_board = models.TextField(blank=True, null=True)
+    trello_done_list = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -125,3 +127,4 @@ class GuildRuleEndorsment(UUIDModel):
     user = models.ForeignKey('user.User', related_name="endorsed")
     endorsed_by = models.ForeignKey('user.User', related_name="endorser", null= True, blank=True)
     week = models.IntegerField(blank=False, null=False)
+    rating = models.PositiveIntegerField(blank=False, null=False, default=0)
