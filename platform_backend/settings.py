@@ -108,7 +108,7 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 # }
 
 # HEROKU
-# DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd4lptoa7krkf8',
