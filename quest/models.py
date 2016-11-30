@@ -10,7 +10,6 @@ class Quest(UUIDModel):
     moodle_link = models.URLField(blank=True, null=True)
     name = models.CharField(max_length=200)
     description = HTMLField()
-    experience = models.PositiveIntegerField()
     interaction_design = IntegerField(
         validators=[
             MaxValueValidator(100),

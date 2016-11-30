@@ -46,7 +46,6 @@ class QuestSerializer(serializers.ModelSerializer):
             'world',
             'name',
             'description',
-            'experience',
             'interaction_design',
             'visual_design',
             'techniek',
