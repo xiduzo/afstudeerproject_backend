@@ -12,10 +12,8 @@ from guild.models import (
     UserInGuild,
     UserGuildRupees,
     GuildQuest,
-    GuildObjective,
-    GuildHistoryUpdate,
-    GuildObjectiveAssignment,
 )
+
 from guild.serializers import (
     GuildSerializer,
     GuildRuleSerializer,
@@ -24,10 +22,6 @@ from guild.serializers import (
     UserInGuildSerializer,
     UserGuildRupeesSerializer,
     GuildQuestSerializer,
-    GuildObjectiveSerializer,
-    GuildHistoryUpdateSerializer,
-    GuildFullHistoryUpdateSerializer,
-    GuildFullObjectiveAssignmentSerializer,
     NewGuildSerializer,
 )
 
@@ -115,54 +109,5 @@ class GuildQuestViewSet(viewsets.ModelViewSet):
             qs = qs.filter(guild=guild)
         if quest:
             qs = qs.filter(quest=quest)
-
-        return qs
-
-class GuildObjectiveViewSet(viewsets.ModelViewSet):
-    queryset = GuildObjective.objects.all()
-    serializer_class = GuildObjectiveSerializer
-
-    def get_queryset(self):
-        qs = super(GuildObjectiveViewSet, self).get_queryset()
-
-        return qs
-
-class GuildHistoryUpdateViewSet(viewsets.ModelViewSet):
-    queryset = GuildHistoryUpdate.objects.all()
-
-    serializer_class = GuildHistoryUpdateSerializer
-
-    def get_queryset(self):
-        guild = self.request.query_params.get('guild')
-        qs = super(GuildHistoryUpdateViewSet, self).get_queryset()
-
-        if guild:
-            qs = qs.filter(guild=guild)
-
-        return qs
-
-class GuildFullHistoryUpdateViewSet(viewsets.ModelViewSet):
-    queryset = GuildHistoryUpdate.objects.all()
-
-    serializer_class = GuildFullHistoryUpdateSerializer
-
-    def get_queryset(self):
-        guild = self.request.query_params.get('guild')
-        start = int(self.request.query_params.get('start'))
-        qs = super(GuildFullHistoryUpdateViewSet, self).get_queryset()
-
-        if guild:
-            qs = qs.filter(guild=guild).order_by("-created_at")
-
-        if start:
-            return qs[start:start+25]
-        return qs
-
-class GuildObjectiveAssignmentViewSet(viewsets.ModelViewSet):
-    queryset = GuildObjectiveAssignment.objects.all()
-    serializer_class = GuildFullObjectiveAssignmentSerializer
-
-    def get_queryset(self):
-        qs = super(GuildObjectiveAssignmentViewSet, self).get_queryset()
 
         return qs

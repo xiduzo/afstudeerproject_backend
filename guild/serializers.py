@@ -14,10 +14,8 @@ from guild.models import (
     UserInGuild,
     UserGuildRupees,
     GuildQuest,
-    GuildObjective,
-    GuildHistoryUpdate,
-    GuildObjectiveAssignment,
 )
+
 from quest.models import Quest, QuestObjective
 
 from user.serializers import UserSerializer, PlainUserSerializer
@@ -105,100 +103,6 @@ class OnlyWorldSerializer(serializers.ModelSerializer):
             'name'
         )
 
-class GuildHistoryUpdateSerializer(serializers.ModelSerializer):
-    guild = serializers.HyperlinkedRelatedField(
-        view_name='guild-detail',
-        queryset=Guild.objects.all(),
-    )
-    user = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        queryset=User.objects.all(),
-    )
-
-    class Meta:
-        model = GuildHistoryUpdate
-        fields = (
-            'id',
-            'created_at',
-            'user',
-            'guild',
-            'action',
-            'action_type',
-            'about',
-        )
-
-class GuildFullHistoryUpdateSerializer(serializers.ModelSerializer):
-    guild = serializers.HyperlinkedRelatedField(
-        view_name='guild-detail',
-        queryset=Guild.objects.all(),
-    )
-    user = UserSerializer()
-
-    class Meta:
-        model = GuildHistoryUpdate
-        fields = (
-            'id',
-            'created_at',
-            'user',
-            'guild',
-            'action',
-            'action_type',
-            'about',
-        )
-
-class GuildFullObjectiveAssignmentSerializer(serializers.ModelSerializer):
-    objective = serializers.HyperlinkedRelatedField(
-        view_name='guildobjective-detail',
-        queryset=GuildObjective.objects.all(),
-    )
-    user = serializers.HyperlinkedRelatedField(
-        view_name='user-detail',
-        queryset=User.objects.all(),
-    )
-
-    class Meta:
-        model = GuildObjectiveAssignment
-        fields = (
-            'id',
-            'objective',
-            'user',
-        )
-
-class GuildObjectiveAssignmentSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-
-    class Meta:
-        model = GuildObjectiveAssignment
-        fields = (
-            'id',
-            'user',
-        )
-
-class GuildObjectiveSerializer(serializers.ModelSerializer):
-
-    guild = serializers.HyperlinkedRelatedField(
-        view_name='guild-detail',
-        queryset=Guild.objects.all(),
-    )
-
-    assignments = GuildObjectiveAssignmentSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = GuildObjective
-        fields = (
-            'url',
-            'id',
-            'created_at',
-            'guild',
-            'name',
-            'objective',
-            'points',
-            'completed',
-            'assignments',
-            'completed_by',
-            'completed_at',
-        )
-
 class GuildFullQuestSerializer(serializers.ModelSerializer):
     guild = serializers.HyperlinkedRelatedField(
         view_name='guild-detail',
@@ -273,19 +177,8 @@ class GuildSerializer(serializers.ModelSerializer):
         users = UserInGuild.objects.filter(guild=obj)
         return UserInGuildFullSerializer(instance=users, many=True, context=self.context).data
 
-    def get_history_updates(self, obj):
-        history_updates = GuildHistoryUpdate.objects.filter(guild=obj)
-        history_updates = history_updates.order_by("-created_at")[:50]
-        return GuildFullHistoryUpdateSerializer(
-                instance=history_updates,
-                many=True,
-                context=self.context
-            ).data
-
 
     members = serializers.SerializerMethodField()
-    objectives = GuildObjectiveSerializer(many=True, read_only=True)
-    history_updates = serializers.SerializerMethodField()
     quests = GuildFullQuestSerializer(many=True, read_only=True);
     rules = GuildRuleSerializer(many=True, read_only=True);
 
@@ -302,8 +195,6 @@ class GuildSerializer(serializers.ModelSerializer):
             'trello_done_list',
             'world',
             'members',
-            'objectives',
-            'history_updates',
             'quests',
             'rules',
         )
