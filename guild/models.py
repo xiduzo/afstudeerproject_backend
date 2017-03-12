@@ -62,11 +62,12 @@ class GuildRule(UUIDModel):
 
     rule_type = models.CharField(max_length=2, choices=RULE__TYPES)
 
-    def __str__(self):
-        return '{}: {}'.format(
-            self.guild.name,
-            self.rule
-        )
+    # Getting unicode error, this is a temp. fix
+    # def __str__(self):
+    #     return '{}: {}'.format(
+    #         self.guild.name,
+    #         self.rule
+    #     )
 
 class GuildRuleEndorsment(UUIDModel):
     rule = models.ForeignKey('guild.GuildRule', related_name='endorsements')
