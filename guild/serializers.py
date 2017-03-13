@@ -75,6 +75,7 @@ class NewGuildRuleEndorsmentSerializer(serializers.ModelSerializer):
             'user',
             'endorsed_by',
             'week',
+            'rating'
         )
 
 class NewGuildSerializer(serializers.ModelSerializer):
