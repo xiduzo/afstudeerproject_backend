@@ -12,7 +12,7 @@ class User(UUIDModel):
     )
 
     uid            = models.CharField(max_length = 20)
-    student_number = models.IntegerField()
+    student_number = models.IntegerField(blank=True, null=True)
     email          = models.EmailField()
     initials       = models.CharField(max_length = 15)
     first_name     = models.CharField(max_length = 50, blank=True, null=True)
