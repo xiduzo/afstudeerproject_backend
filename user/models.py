@@ -17,7 +17,7 @@ class User(UUIDModel):
     initials       = models.CharField(max_length = 15, blank=True, null=True)
     first_name     = models.CharField(max_length = 50, blank=True, null=True)
     surname_prefix = models.CharField(blank=True, null=True,max_length = 50)
-    surname        = models.CharField(max_length = 50)
+    surname        = models.CharField(max_length = 50, blank=True, null=True)
     gender         = models.PositiveIntegerField(
         choices    = GENDERS
     )
