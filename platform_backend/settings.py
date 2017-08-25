@@ -153,6 +153,6 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:3000',
     'localhost',
     '127.0.0.1',
-    'beyond.jstur.org/',
+    'beyond.jstur.org',
     '145.92.7.223'
 )
