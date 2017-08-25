@@ -1,0 +1,64 @@
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 14, 2017 - 10:35:29
+Django version 1.9.9, using settings 'platform_backend.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[auth]
+    changepassword
+    createsuperuser
+
+[django]
+    check
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush
+    inspectdb
+    loaddata
+    makemessages
+    makemigrations
+    migrate
+    sendtestemail
+    shell
+    showmigrations
+    sqlflush
+    sqlmigrate
+    sqlsequencereset
+    squashmigrations
+    startapp
+    startproject
+    test
+    testserver
+
+[sessions]
+    clearsessions
+
+[staticfiles]
+    collectstatic
+    findstatic
+    runserver
+Traceback (most recent call last):
+  File "/home/sander/Documents/school/afstudeerproject_backend/manage.py", line 8, in <module>
+    from django.core.management import execute_from_command_line
+ImportError: No module named django.core.management
+Traceback (most recent call last):
+  File "/home/sander/Documents/school/afstudeerproject_backend/manage.py", line 8, in <module>
+    from django.core.management import execute_from_command_line
+ImportError: No module named django.core.management
+Traceback (most recent call last):
+  File "/home/sander/Documents/school/afstudeerproject_backend/manage.py", line 8, in <module>
+    from django.core.management import execute_from_command_line
+ImportError: No module named django.core.management
+Traceback (most recent call last):
+  File "/home/sander/Documents/school/afstudeerproject_backend/manage.py", line 8, in <module>
+    from django.core.management import execute_from_command_line
+ImportError: No module named django.core.management

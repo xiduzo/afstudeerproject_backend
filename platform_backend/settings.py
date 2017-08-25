@@ -34,7 +34,8 @@ SECRET_KEY = '+%=@8^!ms6gv6-b868rny4!on*6@o8_snhszquc-(&6n-pr9t%'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'murmuring-citadel-56488.herokuapp.com',
+    'localhost',
+    '127.0.0.1'
 ]
 
 
@@ -96,29 +97,16 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 # LOCAL
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'cmd',
-#         'USER': 'cmd',
-#         'PASSWORD': 'cmd',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
-
-# HEROKU
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4lptoa7krkf8',
-        'USER': 'hrjffvukjphrbg',
-        'PASSWORD': 'lk8gshy9nSH7L0IhL6gRBvqN94',
-        'HOST': 'ec2-54-221-226-72.compute-1.amazonaws.com',
+        'NAME': 'athena',
+        'USER': 'athena',
+        'PASSWORD': 'ahtena',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -161,6 +149,10 @@ STATIC_URL = '/static/'
 # Cors settings
 # https://github.com/ottoyiu/django-cors-headers
 CORS_ORIGIN_WHITELIST = (
-    'sanderboer.nl',
     'localhost:3000',
+    '127.0.0.1:3000',
+    'localhost',
+    '127.0.0.1',
+    'http://beyond.jstur.org/',
+    '145.92.7.223'
 )
