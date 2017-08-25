@@ -102,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'athena',
         'USER': 'athena',
-        'PASSWORD': 'ahtena',
+        'PASSWORD': 'athena',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -153,6 +153,6 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:3000',
     'localhost',
     '127.0.0.1',
-    'http://beyond.jstur.org/',
+    'beyond.jstur.org/',
     '145.92.7.223'
 )

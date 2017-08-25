@@ -11,7 +11,7 @@ class User(UUIDModel):
         (FEMALE, ('female'))
     )
 
-    uid            = models.CharField(max_length = 20)
+    uid            = models.CharField(max_length = 20, blank=True, null=True)
     student_number = models.IntegerField(blank=True, null=True)
     email          = models.EmailField()
     initials       = models.CharField(max_length = 15, blank=True, null=True)
