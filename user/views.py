@@ -35,6 +35,9 @@ class UserViewSet(viewsets.ModelViewSet):
         if uid:
             qs = qs.filter(uid=uid)
 
+        if email:
+            qs = qs.filter(email=email)
+
         if is_staff:
             qs = qs.filter(is_staff=is_staff)
 

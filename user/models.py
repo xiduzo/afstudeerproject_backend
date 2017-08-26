@@ -31,13 +31,6 @@ class User(UUIDModel):
         default    = True,
     )
 
-    def get_full_name():
-        return '{} {} {}'.format(
-            self.first_name,
-            self.surname_prefix,
-            self.surname,
-        )
-
     def __str__(self):
         return '{}'.format(
             self.email
