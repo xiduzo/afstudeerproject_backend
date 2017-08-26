@@ -28,6 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         uid = self.request.query_params.get('uid')
+        email = self.request.query_params.get('email')
         is_staff = self.request.query_params.get('is_staff')
         is_superuser = self.request.query_params.get('is_superuser')
         qs = super(UserViewSet, self).get_queryset()
