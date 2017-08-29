@@ -3,7 +3,8 @@ from rest_framework import (
     viewsets,
     response,
     mixins,
-    status
+    status,
+    permissions
 )
 from world.models import (
     World,
@@ -19,6 +20,7 @@ from world.serializers import (
 class WorldViewSet(viewsets.ModelViewSet):
     queryset = World.objects.all()
     serializer_class = WorldSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
@@ -29,6 +31,7 @@ class WorldViewSet(viewsets.ModelViewSet):
 class UserInWorldViewSet(viewsets.ModelViewSet):
     queryset = UserInWorld.objects.all()
     serializer_class = UserInWorldSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):

@@ -92,6 +92,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'platform_backend.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -100,9 +107,9 @@ WSGI_APPLICATION = 'platform_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'athena',
-        'USER': 'athena',
-        'PASSWORD': 'athena',
+        'NAME': 'cmd',
+        'USER': 'cmd',
+        'PASSWORD': 'cmd',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

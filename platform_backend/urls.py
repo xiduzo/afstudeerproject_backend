@@ -25,6 +25,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/',
         include(
             [
@@ -37,17 +38,4 @@ urlpatterns = [
             ]
         )
         ),
-    # url(r'^api/(?P<user_uuid>[-\w]+)/',
-    #     include(
-    #         [
-    #             url(r'^accounts/', include('accounts.urls')),
-    #             url(r'^game/', include('game.urls')),
-    #             url(r'^avatar/', include('avatar.urls')),
-    #             url(r'^team/', include('team.urls')),
-    #             url(r'^mission/', include('mission.urls')),
-    #             url(r'^polling/', include('polling.urls')),
-    #             url(r'^bingo/', include('bingo.urls')),
-    #         ]
-    #     ),
-    #     ),
 ]

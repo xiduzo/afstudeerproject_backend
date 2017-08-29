@@ -3,7 +3,8 @@ from rest_framework import (
     viewsets,
     response,
     mixins,
-    status
+    status,
+    permissions
 )
 
 from .models import (
@@ -22,6 +23,7 @@ from .serializers import (
 class BehaviourViewset(viewsets.ModelViewSet):
     queryset = Behaviour.objects.all()
     serializer_class = BehaviourSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
         qs = super(BehaviourViewset, self).get_queryset()
@@ -31,6 +33,7 @@ class BehaviourViewset(viewsets.ModelViewSet):
 class RewardViewset(viewsets.ModelViewSet):
     queryset = Reward.objects.all()
     serializer_class = RewardSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
         qs = super(RewardViewset, self).get_queryset()
@@ -40,6 +43,7 @@ class RewardViewset(viewsets.ModelViewSet):
 class BehaviourRupeeRewardViewset(viewsets.ModelViewSet):
     queryset = BehaviourRupeeReward.objects.all()
     serializer_class = BehaviourRupeeRewardSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
         qs = super(BehaviourRupeeRewardViewset, self).get_queryset()
@@ -49,6 +53,7 @@ class BehaviourRupeeRewardViewset(viewsets.ModelViewSet):
 class RewardRupeeCostViewset(viewsets.ModelViewSet):
     queryset = RewardRupeeCost.objects.all()
     serializer_class = RewardRupeeCostSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
         qs = super(RewardRupeeCostViewset, self).get_queryset()

@@ -3,7 +3,8 @@ from rest_framework import (
     viewsets,
     response,
     mixins,
-    status
+    status,
+    permissions
 )
 from user.models import User
 from user.serializers import (
@@ -24,6 +25,7 @@ from guild.serializers import (
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
@@ -50,6 +52,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class UserWorldsViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserWorldsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
@@ -60,6 +63,7 @@ class UserWorldsViewSet(viewsets.ModelViewSet):
 class UserGuildsViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserGuildsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
