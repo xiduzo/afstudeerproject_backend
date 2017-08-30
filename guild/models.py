@@ -8,6 +8,7 @@ class Guild(UUIDModel):
     world = models.ForeignKey('world.World', related_name='guilds')
     trello_board = models.TextField(blank=True, null=True)
     trello_done_list = models.TextField(blank=True, null=True)
+    trello_legenda_list = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
