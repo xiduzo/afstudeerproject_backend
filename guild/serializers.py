@@ -194,6 +194,7 @@ class GuildSerializer(serializers.ModelSerializer):
             'name',
             'trello_board',
             'trello_done_list',
+            'trello_legenda_list',
             'world',
             'members',
             'quests',

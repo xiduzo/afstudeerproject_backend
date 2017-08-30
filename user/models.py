@@ -14,6 +14,7 @@ class User(UUIDModel):
     uid            = models.CharField(max_length = 20, blank=True, null=True)
     student_number = models.IntegerField(blank=True, null=True)
     email          = models.EmailField()
+    avatar_hash    = models.CharField(blank=True, null=True, max_length=999)
     initials       = models.CharField(max_length = 15, blank=True, null=True)
     first_name     = models.CharField(max_length = 50, blank=True, null=True)
     surname_prefix = models.CharField(blank=True, null=True,max_length = 50)
