@@ -70,6 +70,7 @@ class UserInWorldSerializer(serializers.ModelSerializer):
         model = UserInWorld
         fields = (
             'url',
+            'id',
             'user',
             'world',
         )
