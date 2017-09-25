@@ -51,7 +51,7 @@ class GamemasterSerializer(serializers.ModelSerializer):
             'id',
             'email',
             'avatar_hash',
-            'initials',
             'first_name',
+            'surname_prefix',
             'surname',
         )
