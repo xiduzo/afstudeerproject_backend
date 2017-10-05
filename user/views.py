@@ -9,9 +9,14 @@ from rest_framework import (
 from user.models import User
 from user.serializers import (
     UserSerializer,
+    V2UserWorldsSerializer,
 )
 
-from world.models import World
+from world.models import (
+    World,
+    UserInWorld,
+)
+
 from world.serializers import (
     WorldSerializer,
     UserWorldsSerializer,
@@ -20,6 +25,21 @@ from world.serializers import (
 from guild.serializers import (
     UserGuildsSerializer,
 )
+
+# V2
+class V2UserWorldsViewSet(viewsets.ModelViewSet):
+    queryset = UserInWorld.objects.all()
+    serializer_class = V2UserWorldsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        qs = super(V2UserWorldsViewSet, self).get_queryset()
+        user = self.request.query_params.get('user')
+
+        if user:
+            qs = qs.filter(user=user)
+
+        return qs
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):

@@ -1,12 +1,13 @@
 from rest_framework import serializers
-from django.utils.translation import gettext as _
 
 from .models import (
     User,
 )
 
-from world.models import World, UserInWorld
-
+from world.models import (
+    World,
+    UserInWorld,
+)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,7 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
             'url',
             'id',
             'created_at',
-            'modified_at',
             'uid',
             'student_number',
             'email',
@@ -54,4 +54,18 @@ class GamemasterSerializer(serializers.ModelSerializer):
             'first_name',
             'surname_prefix',
             'surname',
+        )
+
+# V2
+class V2UserWorldsSerializer(serializers.ModelSerializer):
+
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = UserInWorld
+        depth = 1
+        fields = (
+            'id',
+            'user',
+            'world'
         )

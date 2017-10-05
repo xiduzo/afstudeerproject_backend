@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.db.models import Sum
 
 from .models import (
     World,
@@ -29,6 +28,7 @@ class V2WorldGuildSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guild
         fields = (
+            'url',
             'id',
             'name',
         )
