@@ -1,12 +1,13 @@
 from rest_framework import serializers
-from django.utils.translation import gettext as _
 
 from .models import (
     Guild, UserInGuild
 )
 
 from user.models import User
-from world.models import World
+from world.models import (
+    World,
+)
 from guild.models import (
     Guild,
     GuildRule,
@@ -18,10 +19,80 @@ from guild.models import (
 
 from quest.models import Quest, QuestObjective
 
-from user.serializers import UserSerializer, PlainUserSerializer
-from quest.serializers import QuestSerializer, PlainQuestSerializer
-# from world.serializers import OnlyWorldSerializer
+from user.serializers import (
+    UserSerializer,
+    PlainUserSerializer,
+    GamemasterSerializer,
+)
 
+from quest.serializers import QuestSerializer, PlainQuestSerializer
+# from world.serializers import V2PlainWorldSerializer
+
+
+# V2
+class V2GuildMembersSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserInGuild
+        fields = (
+            'id',
+            'user',
+            'guild'
+        )
+
+class V2GuildRulesSerializer(serializers.ModelSerializer):
+
+    guild = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = GuildRule
+        depth = 1
+        fields = (
+            'id',
+            'rule',
+            'rule_type',
+            'points',
+            'guild',
+            'endorsements',
+        )
+
+class V2PlainWorldSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = World
+        fields = (
+            'url',
+            'id',
+            'name',
+            'start',
+            'course_duration'
+        )
+
+class GuildSerializer(serializers.ModelSerializer):
+    def get_members(self, obj):
+        users = UserInGuild.objects.filter(guild=obj)
+        return UserInGuildFullSerializer(instance=users, many=True, context=self.context).data
+
+
+    members = serializers.SerializerMethodField()
+    world = V2PlainWorldSerializer()
+
+    class Meta:
+        model = Guild
+        fields = (
+            'url',
+            'id',
+            'created_at',
+            'name',
+            'trello_board',
+            'trello_done_list',
+            'trello_legenda_list',
+            'members',
+            'rules',
+            'world'
+        )
+
+# Legacy
 class GuildRuleSerializer(serializers.ModelSerializer):
     def get_endorsements(self, obj):
         endorsements = GuildRuleEndorsment.objects.filter(rule=obj)
@@ -155,8 +226,6 @@ class UserInGuildFullSerializer(serializers.ModelSerializer):
         user_in_guild = UserGuildRupees.objects.filter(user_in_guild=obj)
         return UserGuildRupeesSerializer(instance=user_in_guild, many=True, context=self.context).data
 
-    rupees = serializers.SerializerMethodField()
-
     user = UserSerializer()
     guild = serializers.HyperlinkedRelatedField(
         view_name='guild-detail',
@@ -169,36 +238,6 @@ class UserInGuildFullSerializer(serializers.ModelSerializer):
             'url',
             'user',
             'guild',
-            'rupees',
-        )
-
-
-class GuildSerializer(serializers.ModelSerializer):
-    def get_members(self, obj):
-        users = UserInGuild.objects.filter(guild=obj)
-        return UserInGuildFullSerializer(instance=users, many=True, context=self.context).data
-
-
-    members = serializers.SerializerMethodField()
-    quests = GuildFullQuestSerializer(many=True, read_only=True);
-    rules = GuildRuleSerializer(many=True, read_only=True);
-
-    world = OnlyWorldSerializer()
-
-    class Meta:
-        model = Guild
-        fields = (
-            'url',
-            'id',
-            'created_at',
-            'name',
-            'trello_board',
-            'trello_done_list',
-            'trello_legenda_list',
-            'world',
-            'members',
-            'quests',
-            'rules',
         )
 
 class PlainGuildSerializer(serializers.ModelSerializer):

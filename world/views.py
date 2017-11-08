@@ -12,11 +12,24 @@ from world.models import (
 )
 
 from world.serializers import (
+    V2WorldSerializer,
     WorldSerializer,
     UserInWorldSerializer,
 )
 
 # Create your views here.
+
+class V2WorldViewSet(viewsets.ModelViewSet):
+    queryset = World.objects.all()
+    serializer_class = V2WorldSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # authentication_classes = (authentication.SessionAuthentication,)
+
+    def get_queryset(self):
+        qs = super(V2WorldViewSet, self).get_queryset()
+
+        return qs
+
 class WorldViewSet(viewsets.ModelViewSet):
     queryset = World.objects.all()
     serializer_class = WorldSerializer

@@ -32,9 +32,7 @@ urlpatterns = [
                 url(r'^user/', include('user.urls')),
                 url(r'^world/', include('world.urls')),
                 url(r'^guild/', include('guild.urls')),
-                url(r'^quest/', include('quest.urls')),
                 url(r'^rules/', include('rules.urls')),
-                url(r'^behaviour/', include('behaviour.urls')),
             ]
         )
         ),

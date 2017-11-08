@@ -1,21 +1,57 @@
 from rest_framework import serializers
-from django.db.models import Sum
 
 from .models import (
     World,
     UserInWorld,
 )
 
-from quest.models import Quest
+from guild.models import (
+    Guild
+)
 
 from guild.serializers import GuildSerializer
-from quest.serializers import QuestSerializer
 from user.serializers import UserSerializer, GamemasterSerializer
 from user.models import User
 
+class V2UserInWorldSerializer(serializers.ModelSerializer):
+    user = GamemasterSerializer()
+
+    class Meta:
+        model = UserInWorld
+        fields = (
+            'id',
+            'user'
+        )
+
+class V2WorldGuildSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Guild
+        fields = (
+            'url',
+            'id',
+            'name',
+        )
+
+class V2WorldSerializer(serializers.ModelSerializer):
+    gamemasters = V2UserInWorldSerializer(many=True,read_only=True)
+    guilds = V2WorldGuildSerializer(many=True,read_only=True)
+
+    class Meta:
+        model = World
+        depth = 1
+        fields = (
+            'url',
+            'id',
+            'name',
+            'course_duration',
+            'start',
+            'gamemasters',
+            'guilds'
+        )
+
 class WorldSerializer(serializers.ModelSerializer):
     guilds = GuildSerializer(many=True, read_only=True)
-    quests = QuestSerializer(many=True, read_only=True)
 
     def get_gamemasters(self, obj):
         gamemasters = User.objects.filter(worlds__world=obj)
@@ -33,7 +69,6 @@ class WorldSerializer(serializers.ModelSerializer):
             'course_duration',
             'start',
             'gamemasters',
-            'quests',
             'guilds',
         )
 

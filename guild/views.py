@@ -16,6 +16,9 @@ from guild.models import (
 )
 
 from guild.serializers import (
+    V2GuildMembersSerializer,
+    V2GuildRulesSerializer,
+
     GuildSerializer,
     GuildRuleSerializer,
     GuildRuleEndorsmentSerializer,
@@ -26,6 +29,38 @@ from guild.serializers import (
     NewGuildSerializer,
 )
 
+
+#V2
+class V2GuildMembersViewSet(viewsets.ModelViewSet):
+    queryset = UserInGuild.objects.all()
+    serializer_class = V2GuildMembersSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        guild = self.request.query_params.get('guild')
+        qs = super(V2GuildMembersViewSet, self).get_queryset()
+
+        if guild:
+            qs = qs.filter(guild=guild)
+
+        return qs
+
+class V2GuildRulesViewSet(viewsets.ModelViewSet):
+    queryset = GuildRule.objects.all()
+    serializer_class = V2GuildRulesSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        guild = self.request.query_params.get('guild')
+        qs = super(V2GuildRulesViewSet, self).get_queryset()
+
+        if guild:
+            qs = qs.filter(guild=guild)
+
+        return qs
+
+
+# Legagy
 class GuildRuleViewSet(viewsets.ModelViewSet):
     queryset = GuildRule.objects.all()
     serializer_class = GuildRuleSerializer
