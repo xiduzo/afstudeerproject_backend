@@ -30,7 +30,8 @@ from guild.serializers import (
 class V2UserWorldsViewSet(viewsets.ModelViewSet):
     queryset = UserInWorld.objects.all()
     serializer_class = V2UserWorldsSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(V2UserWorldsViewSet, self).get_queryset()
@@ -45,8 +46,8 @@ class V2UserWorldsViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    # authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         uid = self.request.query_params.get('uid')
@@ -76,8 +77,8 @@ class UserViewSet(viewsets.ModelViewSet):
 class UserWorldsViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserWorldsSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    # authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(UserWorldsViewSet, self).get_queryset()
@@ -87,8 +88,8 @@ class UserWorldsViewSet(viewsets.ModelViewSet):
 class UserGuildsViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserGuildsSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    # authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(UserGuildsViewSet, self).get_queryset()

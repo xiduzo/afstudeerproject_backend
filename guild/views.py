@@ -34,7 +34,7 @@ from guild.serializers import (
 class V2GuildMembersViewSet(viewsets.ModelViewSet):
     queryset = UserInGuild.objects.all()
     serializer_class = V2GuildMembersSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         guild = self.request.query_params.get('guild')
@@ -48,7 +48,7 @@ class V2GuildMembersViewSet(viewsets.ModelViewSet):
 class V2GuildRulesViewSet(viewsets.ModelViewSet):
     queryset = GuildRule.objects.all()
     serializer_class = V2GuildRulesSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         guild = self.request.query_params.get('guild')
@@ -64,7 +64,7 @@ class V2GuildRulesViewSet(viewsets.ModelViewSet):
 class GuildRuleViewSet(viewsets.ModelViewSet):
     queryset = GuildRule.objects.all()
     serializer_class = GuildRuleSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(GuildRuleViewSet, self).get_queryset()
@@ -74,7 +74,7 @@ class GuildRuleViewSet(viewsets.ModelViewSet):
 class GuildRuleEndorsmentViewSet(viewsets.ModelViewSet):
     queryset = GuildRuleEndorsment.objects.all()
     serializer_class = GuildRuleEndorsmentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(GuildRuleEndorsmentViewSet, self).get_queryset()
@@ -84,7 +84,7 @@ class GuildRuleEndorsmentViewSet(viewsets.ModelViewSet):
 class NewGuildRuleEndorsmentViewSet(viewsets.ModelViewSet):
     queryset = GuildRuleEndorsment.objects.all()
     serializer_class = NewGuildRuleEndorsmentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(NewGuildRuleEndorsmentViewSet, self).get_queryset()
@@ -95,7 +95,7 @@ class NewGuildRuleEndorsmentViewSet(viewsets.ModelViewSet):
 class GuildViewSet(viewsets.ModelViewSet):
     queryset = Guild.objects.all()
     serializer_class = GuildSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
@@ -106,7 +106,7 @@ class GuildViewSet(viewsets.ModelViewSet):
 class NewGuildViewSet(viewsets.ModelViewSet):
     queryset = Guild.objects.all()
     serializer_class = NewGuildSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(NewGuildViewSet, self).get_queryset()
@@ -116,7 +116,7 @@ class NewGuildViewSet(viewsets.ModelViewSet):
 class UserInGuildViewSet(viewsets.ModelViewSet):
     queryset = UserInGuild.objects.all()
     serializer_class = UserInGuildSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         user = self.request.query_params.get('user')
@@ -131,7 +131,7 @@ class UserInGuildViewSet(viewsets.ModelViewSet):
 class UserGuildRupeesViewSet(viewsets.ModelViewSet):
     queryset = UserGuildRupees.objects.all()
     serializer_class = UserGuildRupeesSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         qs = super(UserGuildRupeesViewSet, self).get_queryset()
@@ -142,7 +142,7 @@ class UserGuildRupeesViewSet(viewsets.ModelViewSet):
 class GuildQuestViewSet(viewsets.ModelViewSet):
     queryset = GuildQuest.objects.all()
     serializer_class = GuildQuestSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         guild = self.request.query_params.get('guild')

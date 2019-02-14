@@ -22,7 +22,7 @@ from world.serializers import (
 class V2WorldViewSet(viewsets.ModelViewSet):
     queryset = World.objects.all()
     serializer_class = V2WorldSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
@@ -33,7 +33,7 @@ class V2WorldViewSet(viewsets.ModelViewSet):
 class WorldViewSet(viewsets.ModelViewSet):
     queryset = World.objects.all()
     serializer_class = WorldSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
@@ -44,7 +44,7 @@ class WorldViewSet(viewsets.ModelViewSet):
 class UserInWorldViewSet(viewsets.ModelViewSet):
     queryset = UserInWorld.objects.all()
     serializer_class = UserInWorldSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     # authentication_classes = (authentication.SessionAuthentication,)
 
     def get_queryset(self):
