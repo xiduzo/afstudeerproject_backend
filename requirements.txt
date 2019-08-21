@@ -1,27 +1,27 @@
 django>=1.9,<1.10
-psycopg2
-djangorestframework>=3.2,<4
-markdown
-django-filter
-pytz
+psycopg2==2.7.1
+djangorestframework==3.6.3
+Markdown==2.6.8
+django-filter==1.0.4
+pytz==2017.2
 django-cors-headers==1.1.0
 djangorestframework-jwt==1.7.2
 requests==2.8.1
 django-websocket-redis>=0.4.4,<0.5
-uwsgi==2.0.11.2
+#uwsgi==2.0.11.2
 celery==3.1.19
 django-polymorphic>=0.9,<0.10
-django-tinymce
-dj-database-url
-dj-static
-gunicorn
+django-tinymce==2.6.0
+dj-database-url==0.4.2
+dj-static==0.0.6
+gunicorn==19.7.1
 
-paramiko
-unicodecsv
+paramiko==2.2.1
+unicodecsv==0.14.1
 raven<5
 
 #ssl stuff
-pyopenssl==0.15.1
+#pyopenssl==0.15.1
 ndg-httpsclient==0.4.0
 pyasn1==0.1.9
 
@@ -31,7 +31,7 @@ freezegun==0.3.5
 websocket-client==0.34
 django-redis-sessions==0.5.0
 
-slacker
+slacker==0.9.50
 
 django-pgjson==0.3.1
-jsonfield
+jsonfield==2.0.2
