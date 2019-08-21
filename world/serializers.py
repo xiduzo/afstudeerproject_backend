@@ -46,6 +46,7 @@ class V2WorldSerializer(serializers.ModelSerializer):
             'name',
             'course_duration',
             'start',
+            'trello_user_id',
             'gamemasters',
             'guilds'
         )

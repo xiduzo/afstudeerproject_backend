@@ -65,7 +65,8 @@ class V2PlainWorldSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'start',
-            'course_duration'
+            'course_duration',
+            'trello_user_id'
         )
 
 class GuildSerializer(serializers.ModelSerializer):

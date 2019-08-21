@@ -6,6 +6,7 @@ class World(UUIDModel):
     name = models.CharField(max_length=150)
     course_duration = models.IntegerField(blank=True, null=True)
     start = models.DateTimeField(blank=True, null=True)
+    trello_user_id = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.name
