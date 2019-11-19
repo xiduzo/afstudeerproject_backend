@@ -59,6 +59,7 @@ class GuildRule(UUIDModel):
 
     guild = models.ForeignKey('guild.Guild', related_name='rules')
     rule = models.TextField(blank=False, null=False)
+    rule_eng = models.TextField(blank=False, null=False)
     points = models.IntegerField(blank=False, null=False)
 
     rule_type = models.CharField(max_length=2, choices=RULE__TYPES)

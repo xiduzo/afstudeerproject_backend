@@ -50,6 +50,7 @@ class V2GuildRulesSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'rule',
+            'rule_eng',
             'rule_type',
             'points',
             'guild',
@@ -108,6 +109,7 @@ class GuildRuleSerializer(serializers.ModelSerializer):
             'id',
             'guild',
             'rule',
+            'rule_eng',
             'rule_type',
             'points',
             'endorsements',
@@ -121,6 +123,7 @@ class PlainGuildRuleSerializer(serializers.ModelSerializer):
             'id',
             'guild',
             'rule',
+            'rule_eng',
             'rule_type',
             'points',
         )
