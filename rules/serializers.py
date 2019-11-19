@@ -11,6 +11,7 @@ class RuleSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'rule',
+            'rule_eng',
             'points',
             'rule_type',
         )
